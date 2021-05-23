@@ -7,16 +7,14 @@ const path = require('path');
 const flash = require('connect-flash');
 const compression = require('compression');
 const moment = require('moment');
-const ErrorHandler = require('./utils/errorHandler.js');
-const morganMiddleware = require('./utils/morganMiddleWare.js');
-const Logger = require('./utils/logger.js');
 const mysql = require('mysql');
 
 // Setup DB
 const db = mysql.createConnection({
   host: "localhost",
-  user: "",
-  password: ""
+  user: "root",
+  password: "",
+  database: "test"
 });
 
 
@@ -31,7 +29,6 @@ app.set('view engine', 'ejs');
 
 // Middleware setup
 app.use(compression());
-app.use(morganMiddleware);
 app.use(express.json({ limit: '100mb' }));
 app.use(express.urlencoded({ extended: false, limit: '5gb' }));
 app.use(express.static(path.join(__dirname, 'public')));
@@ -73,7 +70,6 @@ app.use((req, res, next) => {
 app.use((err, req, res, next) => {
   // set locals, only providing error in development
   res.locals.message = err.message;
-  res.locals.error.status = err.status;
   if (process.env.NODE_ENV === 'development') {
     res.locals.error = err;
   }
