@@ -1,19 +1,10 @@
 import logo from './logo.svg';
 import './App.css';
 
-function constructor(props) {
-  super(props);
-  this.state = { apiResponse: "" };
-}
-
 function callAPI() {
   fetch("http://localhost:9000/")
       .then(res => res.text())
       .then(res => this.setState({ apiResponse: res }));
-}
-
-function componentWillMount() {
-  this.callAPI();
 }
 
 function App() {
@@ -23,8 +14,6 @@ function App() {
         <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.js</code> and save to reload.
-          <br></br>
-          Hello World
         </p>
         <a
           className="App-link"
