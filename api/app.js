@@ -9,12 +9,22 @@ const mysql = require('mysql');
 const db = mysql.createConnection({
   host: "localhost",
   user: "root",
-  password: "",
+  password: "password",
   database: "test"
+});
+
+db.connect(function (err) {
+  if (err) {
+    console.error('error connecting to mysql database: ' + err.stack);
+    return;
+  }
+
+  console.log('connected to MySQL database');
 });
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+const { createConnection } = require('net');
 
 var app = express();
 
