@@ -1,0 +1,12 @@
+.Header {
+    background-color: black;
+    color: white;
+    padding: 5%;
+    text-align: left;
+    font-size: 30px;
+}
+
+.Logo {
+    height: 30px;
+    width: 30px;
+}
