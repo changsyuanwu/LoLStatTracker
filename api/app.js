@@ -1,3 +1,6 @@
+require('dotenv').config({
+  path: `./env-files/${process.env.NODE_ENV || 'development'}.env`,
+});
 const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
@@ -7,10 +10,10 @@ const mysql = require('mysql');
 
 // Setup DB
 const db = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "password",
-  database: "test"
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_DATABASE
 });
 
 db.connect(function (err) {
