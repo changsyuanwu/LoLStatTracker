@@ -8,4 +8,6 @@ router.get('/', IndexController.getIndex);
 
 router.get('/test-query', IndexController.getTestQuery);
 
+router.get('/anze-test-query', IndexController.getAnzeTestQuery);
+
 module.exports = router;
