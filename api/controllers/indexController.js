@@ -22,7 +22,7 @@ class IndexController {
     db.query('SELECT * FROM test WHERE text = \"this is a string from the db\"', (err, results, fields) => {
       if (err) throw err;
       console.log(results);
-      return res.send('Test output: ' + results[0]);
+      return res.json(results);
     });
   }
 
