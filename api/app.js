@@ -25,8 +25,10 @@ db.connect(function (err) {
   console.log('connected to MySQL database');
 });
 
+// Router setup
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
+
 
 const app = express();
 
