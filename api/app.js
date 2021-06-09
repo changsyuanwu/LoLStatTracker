@@ -24,7 +24,6 @@ db.connect(function (err) {
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-const { createConnection } = require('net');
 
 var app = express();
 

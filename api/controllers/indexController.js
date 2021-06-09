@@ -1,11 +1,7 @@
 class IndexController {
 
-  static getStarter(req, res, next) {
-    return res.render('starter', {});
-  }
-
-  static getHome(req, res, next) {
-    return res.render('home', {});
+  static getIndex(req, res, next) {
+    return res.send("I'm working");
   }
 
 }
