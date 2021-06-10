@@ -6,24 +6,15 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-const mysql = require('mysql');
+const mysql = require('mysql2');
 
 // Setup DB
-const db = mysql.createConnection({
+let db = mysql.createPool({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_DATABASE
-});
-
-db.connect(function (err) {
-  if (err) {
-    console.error('error connecting to mysql database: ' + err.stack);
-    return;
-  }
-
-  console.log('connected to MySQL database');
-});
+}).promise();
 
 // Router setup
 const indexRouter = require('./routes/indexRouter');
