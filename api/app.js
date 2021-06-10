@@ -27,7 +27,6 @@ db.connect(function (err) {
 
 // Router setup
 const indexRouter = require('./routes/indexRouter');
-const usersRouter = require('./routes/usersRouter');
 const championsRouter = require('./routes/championsRouter');
 
 // App setup
@@ -41,7 +40,6 @@ app.use((req, res, next) => {
 
 // Use the router
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
 app.use('/champions', championsRouter);
 
 // view engine setup
