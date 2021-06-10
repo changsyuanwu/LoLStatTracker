@@ -1,6 +1,6 @@
 class ChampionsController {
 
-  static async getChampionByName(req, res, next) {
+  static async getChampionStatsByName(req, res, next) {
     // Get a champion by their name (case insensitive)
 
     const db = req.db;
@@ -16,7 +16,7 @@ class ChampionsController {
     }
   }
 
-  static async getChampionWinRateByName(req, res, next) {
+  static async getChampionPlayStatsByName(req, res, next) {
     const db = req.db;
 
     const name = req.params.name.toLowerCase();
@@ -70,11 +70,15 @@ class ChampionsController {
         [name, name]
       );
 
+      const [totalMatchesPlayed] = await db.query(`SELECT COUNT(*) AS count FROM matches`);
+
       const winrate = numMatchesWon[0].count / numMatchesPlayed[0].count;
+      const playrate = numMatchesPlayed[0].count / totalMatchesPlayed[0].count;
 
       return res.json({ 
         champion: name,
         winrate: winrate,
+        playrate: playrate,
         won: numMatchesWon[0].count,
         played: numMatchesPlayed[0].count
       });
