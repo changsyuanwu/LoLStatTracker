@@ -80,6 +80,66 @@ class MatchesController {
     }
   }
 
+  static async postNewMatch(req, res, next) {
+    const db = req.db;
+    /*
+    // enforce database requirements
+    if (req.body.blue_top || req.body.blue_jungle || req.body.blue_mid || 
+        req.body.blue_adc || req.body.blue_support || req.body.red_top || 
+        req.body.red_jungle || req.body.red_mid || req.body.red_adc ||
+        req.body.red_support || req.body.result) {
+      return res.status(400).json({
+        error: "Missing mandatory field"
+      });
+    }
+    if (req.body.result != 'Blue' && req.body.result != 'Red') {
+      return res.status(400).json({
+        error: "Result must be one of 'Blue' or 'Red'"
+      });
+    }
+    const championsToCheck = [req.body.blue_top, req.body.blue_jungle,
+      req.body.blue_mid, req.body.blue_adc, req.body.blue_support,
+      req.body.red_top, req.body.red_jungle, req.body.red_mid, req.body.red_adc,
+      req.body.red_support];
+    let [foundChampion];
+    for (const championName in championsToCheck) {
+      foundChampion = await db.query(`SELECT COUNT(*) FROM champions 
+        WHERE champion_name = LOWER(?)`, [championName]);
+      if (foundChampion[0] == 0) {
+        return res.status(400).json({
+          error: championName + " is not a valid champion name"
+        });
+      }
+    }
+
+    try {
+      await db.query(`INSERT INTO matches (
+        blue_top, blue_jungle, blue_mid, blue_adc, blue_support, red_top, 
+        red_jungle, red_mid, red_adc, red_support, result)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+        [req.body.blue_top, req.body.blue_jungle,
+         req.body.blue_mid, req.body.blue_adc, req.body.blue_support,
+         req.body.red_top, req.body.red_jungle, req.body.red_mid, 
+         req.body.red_adc, req.body.red_support, req.body.result]);
+    } catch (err) {
+      throw err;
+    }
+    */
+    try {
+      await db.query(
+        `INSERT INTO matches (
+          blue_top, blue_jungle, blue_mid, blue_adc, blue_support, red_top, 
+          red_jungle, red_mid, red_adc, red_support, result)
+        VALUES (
+          'Lee Sin', 'Rumble', 'Sett', 'Varus', 'Lulu', 'Viego', 'Xin Zhao',
+          'Lucian', 'Ezreal', 'Leona', 'Red')`);
+      console.log("Entry created successfully.");
+    } catch (err) {
+      throw err;
+    }
+  }
+
+
 }
 
 module.exports = MatchesController;
