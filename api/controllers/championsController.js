@@ -22,13 +22,7 @@ class ChampionsController {
     try {
       const [champsList] = await db.query(`SELECT champion_name FROM champions`);
 
-      let champNamesAry = [];
-
-      champsList.forEach((row, index) => {
-        champNamesAry.push(row.champion_name);
-      })
-
-      return res.json(champNamesAry);
+      return res.json(champsList.map(champ => champ.champion_name));
     }
     catch (err) {
       throw err;
