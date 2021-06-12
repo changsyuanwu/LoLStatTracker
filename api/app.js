@@ -19,7 +19,7 @@ let db = mysql.createPool({
 // Router setup
 const indexRouter = require('./routes/indexRouter');
 const championsRouter = require('./routes/championsRouter');
-const matchRouter = require('./routes/matchRouter');
+const matchesRouter = require('./routes/matchesRouter');
 
 // App setup
 const app = express();
