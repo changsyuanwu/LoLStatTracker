@@ -14,4 +14,22 @@ router.get('/', MatchesController.getMatches);
  */
 router.get('/filter', MatchesController.getChampionMatchesListFilters);
 
+/* POST new match details: 
+ *   blue_top: [champion name, unique within the team]
+ *   blue_jungle: [champion name, unique within the team]
+ *   blue_mid: [champion name, unique within the team]
+ *   blue_adc: [champion name, unique within the team]
+ *   blue_support: [champion name, unique within the team]
+ *   red_top: [champion name, unique within the team]
+ *   red_jungle: [champion name, unique within the team]
+ *   red_mid: [champion name, unique within the team]
+ *   red_adc: [champion name, unique within the team]
+ *   red_support: [champion name, unique within the team]
+ *   result: ONE OF [Red, Blue]
+ */
+router.post('/new', MatchesRouter.postNewMatch);
+
+/* PUT new details for an existing match */
+//router.put('/edit/:matchID');
+
 module.exports = router;
