@@ -9,4 +9,7 @@ router.get('/stats/:name', ChampionsController.getChampionStatsByName);
 /* GET champion play stats (winrate, playrate, num matches won, num matches played) by name */
 router.get('/play-stats/:name', ChampionsController.getChampionPlayStatsByName);
 
+/* GET a list of champion names in an array */
+router.get('/list', ChampionsController.getChampionNamesList);
+
 module.exports = router;
