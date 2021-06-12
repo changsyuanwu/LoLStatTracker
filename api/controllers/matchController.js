@@ -1,6 +1,6 @@
 const { NotFound } = require("http-errors");
 
-class MatchController {
+class MatchesController {
 
   static async getMatches(req, res, next) {
     const db = req.db;
@@ -69,4 +69,4 @@ class MatchController {
 
 }
 
-module.exports = MatchController;
+module.exports = MatchesController;
