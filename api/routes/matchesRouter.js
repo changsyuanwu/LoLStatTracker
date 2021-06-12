@@ -1,9 +1,9 @@
 const express = require('express');
-const MatchController = require('../controllers/matchController');
+const MatchesController = require('../controllers/matchesController');
 const router = express.Router();
 
 /* GET all matches */
-router.get('/', MatchController.getMatches);
+router.get('/', MatchesController.getMatches);
 
 /* GET matches with query list parameters:
  *   name: name of the champion being queried, non-null
@@ -12,6 +12,6 @@ router.get('/', MatchController.getMatches);
  * 
  * Example: .../filter?name=ezreal&position=adc&outcome=win
  */
-router.get('/filter', MatchController.getChampionMatchesListFilters);
+router.get('/filter', MatchesController.getChampionMatchesListFilters);
 
 module.exports = router;
