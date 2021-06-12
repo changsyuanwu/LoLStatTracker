@@ -24,6 +24,12 @@ class MatchesController {
     let position;
     if (req.query.position) {
       position = req.query.position.toLowerCase();
+      if (position != 'all' && position != 'top' && position != 'jungle' 
+          && position != 'mid' && position != 'adc' && position != 'support') {
+        return res.status(400).json({
+          error: "Invalid position"
+        });
+      }
     } else {
       position = 'all';
     }
@@ -31,6 +37,11 @@ class MatchesController {
     let outcome;
     if (req.query.outcome) {
       outcome = req.query.outcome.toLowerCase();
+      if (outcome != 'all' && outcome != 'win' && outcome != 'loss') {
+        return res.status(400).json({
+          error: "Invalid outcome"
+        });
+      }
     } else {
       outcome = 'all';
     }
