@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Container, Row, Col, Card, Form, Navbar, Nav } from "react-bootstrap";
+import { Container, Row, Col, Accordion } from "react-bootstrap";
 import styles from "./MatchHistory.module.css";
 import Header from "../Header/Header";
 
@@ -13,14 +13,27 @@ export default class Dashboard extends Component {
             <Container fluid>
                 <Header />
                 <Row className={styles.searchHeader}>
-                    Search Champion Match History
+                    <Col></Col>
+                    <Col>
+                        Search Champion Match History
+                    </Col>
+                    <Col></Col>
                 </Row>
                 <Row>
-                    <form>
+                    <form className={styles.inputSection}>
                         <input type="text" />
+                        <input type="submit" />
                     </form>
                 </Row>
                 <Row>
+                    <Col></Col>
+                    <Col>
+                        Champion Match History Results
+                    </Col>
+                    <Col></Col>
+                </Row>
+                <Row>
+
                 </Row>
             </Container>
         )

@@ -1,3 +1,8 @@
 .searchHeader {
-    text-align: center;
+    padding-top: 50px;
+    padding-bottom: 10px;
+}
+
+.inputSection {
+    padding-bottom: 30px;
 }
