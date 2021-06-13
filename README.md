@@ -1,6 +1,6 @@
 # CS348 Group Project
 
-## Prerequisites
+# Prerequisites
 
 To run, make sure you have Node.js and MySQL installed.
 
@@ -16,7 +16,8 @@ Navigate to the `api` folder and run `mysql -u root test -p` and enter `password
 
 Once you have entered the mysql shell (you should see `mysql >` in your command line), run `source ./data/LOL_champions_stats.sql` and `source ./data/matches2020.sql` to create and populate the required tables.
 
-## Running the program
+
+# Running the program
 
 Both the API and the client must be running at the same time for the user interface to function properly (the user interface pulls data from the API).
 
@@ -38,5 +39,11 @@ To start the program run `npm start`
 
 It should automatically open a browser window to http://localhost:3000 and there should be something there.
 
-## Features
 
+# Features
+
+## API
+
+`localhost:9000`
+
+## Client
