@@ -16,6 +16,25 @@ class ChampionsController {
     }
   }
 
+  static async getChampionNamesList(req, res, next) {
+    const db = req.db;
+
+    try {
+      const [champsList] = await db.query(`SELECT champion_name FROM champions`);
+
+      let champNamesAry = [];
+
+      champsList.forEach((row, index) => {
+        champNamesAry.push(row.champion_name);
+      })
+
+      return res.json(champNamesAry);
+    }
+    catch (err) {
+      throw err;
+    }
+  }
+
   static async getChampionPlayStatsByName(req, res, next) {
     const db = req.db;
 
