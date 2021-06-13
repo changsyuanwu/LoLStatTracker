@@ -13,6 +13,18 @@ CREATE TABLE matches(
   ,red_support  VARCHAR(20) NOT NULL
   ,result       VARCHAR(5) NOT NULL
 );
+INSERT INTO matches(blue_top,blue_jungle,blue_mid,blue_adc,blue_support,red_top,red_jungle,red_mid,red_adc,red_support,result) VALUES ('Renekton','Lilia','Yone','Ezreal','Leona','Gangplank','Nidalee','Orianna','Senna','Sett','Blue');
+INSERT INTO matches(blue_top,blue_jungle,blue_mid,blue_adc,blue_support,red_top,red_jungle,red_mid,red_adc,red_support,result) VALUES ('Gangplank','Hecarim','Seraphine','Senna','Tahm Kench','Sion','Nidalee','Sylas','Kalista','Rell','Red');
+INSERT INTO matches(blue_top,blue_jungle,blue_mid,blue_adc,blue_support,red_top,red_jungle,red_mid,red_adc,red_support,result) VALUES ('Renekton','Nidalee','Sylas','Kalista','Alistar','Urgot','Hecarim','Ahri','Ezreal','Seraphine','Red');
+INSERT INTO matches(blue_top,blue_jungle,blue_mid,blue_adc,blue_support,red_top,red_jungle,red_mid,red_adc,red_support,result) VALUES ('Gwen','Xin Zhao','Tristana','Kog''Maw','Lulu','Volibear','Lee Sin','Zoe','Ezreal','Lulu','Blue');
+INSERT INTO matches(blue_top,blue_jungle,blue_mid,blue_adc,blue_support,red_top,red_jungle,red_mid,red_adc,red_support,result) VALUES ('Gnar','Nidalee','Azir','Kai''Sa','Galio','Gangplank','Hecarim','Ryze','Samira','Rell','Blue');
+INSERT INTO matches(blue_top,blue_jungle,blue_mid,blue_adc,blue_support,red_top,red_jungle,red_mid,red_adc,red_support,result) VALUES ('Gnar','Hecarim','Viktor','Kai''Sa','Rell','Jayce','Nidalee','Syndra','Senna','Tahm Kench','Blue');
+INSERT INTO matches(blue_top,blue_jungle,blue_mid,blue_adc,blue_support,red_top,red_jungle,red_mid,red_adc,red_support,result) VALUES ('Viego','Udyr','Sylas','Kog''Maw','Lulu','Nocturne','Rumble','Lucian','Tristana','Leona','Blue');
+INSERT INTO matches(blue_top,blue_jungle,blue_mid,blue_adc,blue_support,red_top,red_jungle,red_mid,red_adc,red_support,result) VALUES ('Lee Sin','Volibear','Sylas','Ezreal','Karma','Nocturne','Rumble','Viego','Tristana','Rell','Red');
+INSERT INTO matches(blue_top,blue_jungle,blue_mid,blue_adc,blue_support,red_top,red_jungle,red_mid,red_adc,red_support,result) VALUES ('Jayce','Skarner','Syndra','Kai''Sa','Rakan','Gnar','Lilia','Azir','Aphelios','Rell','Blue');
+INSERT INTO matches(blue_top,blue_jungle,blue_mid,blue_adc,blue_support,red_top,red_jungle,red_mid,red_adc,red_support,result) VALUES ('Sion','Xin Zhao','Katarina','Ezreal','Leona','Mundo','Shaco','Zed','Tristana','Lulu','Blue');
+INSERT INTO matches(blue_top,blue_jungle,blue_mid,blue_adc,blue_support,red_top,red_jungle,red_mid,red_adc,red_support,result) VALUES ('Cho''Gath','Xin Zhao','Kog''Maw','Shen','Blitzcrank','Nasus','Volibear','Sylas','Twitch','Vel''Koz','Blue');
+INSERT INTO matches(blue_top,blue_jungle,blue_mid,blue_adc,blue_support,red_top,red_jungle,red_mid,red_adc,red_support,result) VALUES ('Udyr','Malphite','Kayle','Yasuo','Blitzcrank','Mordekaiser','Trundle','Yone','Katarina','Leona','Red');
 INSERT INTO matches(blue_top,blue_jungle,blue_mid,blue_adc,blue_support,red_top,red_jungle,red_mid,red_adc,red_support,result) VALUES ('Rumble','Elise','Qiyana','Miss Fortune','Nautilus','Aatrox','Gragas','Mordekaiser','Xayah','Rakan','Blue');
 INSERT INTO matches(blue_top,blue_jungle,blue_mid,blue_adc,blue_support,red_top,red_jungle,red_mid,red_adc,red_support,result) VALUES ('Jayce','Jarvan IV','Orianna','Miss Fortune','Nautilus','Aatrox','Elise','Qiyana','Varus','Tahm Kench','Red');
 INSERT INTO matches(blue_top,blue_jungle,blue_mid,blue_adc,blue_support,red_top,red_jungle,red_mid,red_adc,red_support,result) VALUES ('Renekton','Rek''Sai','Mordekaiser','Xayah','Rakan','Aatrox','Sejuani','Azir','Miss Fortune','Nautilus','Blue');
