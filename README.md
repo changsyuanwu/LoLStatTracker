@@ -71,3 +71,5 @@ We will be referring to `http://localhost:9000` as `...` since all routes have t
     * Example: `.../matches/filter?name=ezreal&position=adc&outcome=win` will return all matches with `Ezreal` being played in the `adc` position with the outcome being a `win` for Ezreal's team `[{"match_id":61,"blue_top":"Aatrox","blue_jungle":"Gragas","blue_mid":"Leblanc","blue_adc":"Aphelios","blue_support":"Leona","red_top":"Urgot","red_jungle":"Lee Sin","red_mid":"Nautilus","red_adc":"Ezreal","red_support":"Braum","result":"Red"},{"match_id":79,"blue_top":"Renekton","blue_jungle":"Elise","blue_mid":"Qiyana","blue_adc":"Ezreal","blue_support":"Braum","red_top":"Gangplank","red_jungle":"Gragas","red_mid":"Zoe","red_adc":"Aphelios","red_support":"Leona","result":"Blue"}, ...]`
 
 ## Client
+
+Can view match history on the dashboard
