@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import { Container, Row, Col, Card, Form } from "react-bootstrap";
+import { Container, Row, Col} from "react-bootstrap";
 import styles from "./Dashboard.module.css";
-import Logo from "../../Assets/Images/lol_logo.png";
-import Table from "../Table/Table.jsx"
+import Header from "../Header/Header";
+import Table from "../Table/Table.jsx";
 
 export default class Login extends Component {
     constructor(props) {
@@ -12,10 +12,7 @@ export default class Login extends Component {
     render() {
         return (
             <Container fluid>
-                <Row className={styles.Header}>
-                    <img src={Logo} className={styles.Logo} />
-                    CS348 League of Legends Project
-                </Row>
+                <Header />
                 <Row className={styles.queryInfo}>
                     Query Information
                     <Col>
