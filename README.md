@@ -1,6 +1,6 @@
 # CS348 Group Project
 
-The files needed for each Milestone are in the `archives` folder
+The files needed for each Milestone are located in the `archives` folder
 
 # Prerequisites
 
@@ -63,5 +63,11 @@ We will be referring to `http://localhost:9000` as `...` since all routes have t
     * Example `.../champions/update-stats?name=ezreal&stat=health&value=500` will set Ezreal's health stat to 500
 
 ### Matches
+
+  * GET `.../matches` will return an array of all the matches in the database
+    * Example: `.../matches` will return `[{"match_id":1,"blue_top":"Rumble","blue_jungle":"Elise","blue_mid":"Qiyana","blue_adc":"Miss Fortune","blue_support":"Nautilus","red_top":"Aatrox","red_jungle":"Gragas","red_mid":"Mordekaiser","red_adc":"Xayah","red_support":"Rakan","result":"Blue"},{"match_id":2,"blue_top":"Jayce","blue_jungle":"Jarvan IV","blue_mid":"Orianna","blue_adc":"Miss Fortune","blue_support":"Nautilus","red_top":"Aatrox","red_jungle":"Elise","red_mid":"Qiyana","red_adc":"Varus","red_support":"Tahm Kench","result":"Red"}, ...]`
+  
+  * GET `.../matches/filter?name=<name>&position=<all/top/jungle/mid/adc/support>&outcome=<all/win/loss>` will return an array of matches with the champion given by `name` being played in `position` with the game outcome being `outcome`
+    * Example: `.../matches/filter?name=ezreal&position=adc&outcome=win` will return all matches with `Ezreal` being played in the `adc` position with the outcome being a `win` for Ezreal's team `[{"match_id":61,"blue_top":"Aatrox","blue_jungle":"Gragas","blue_mid":"Leblanc","blue_adc":"Aphelios","blue_support":"Leona","red_top":"Urgot","red_jungle":"Lee Sin","red_mid":"Nautilus","red_adc":"Ezreal","red_support":"Braum","result":"Red"},{"match_id":79,"blue_top":"Renekton","blue_jungle":"Elise","blue_mid":"Qiyana","blue_adc":"Ezreal","blue_support":"Braum","red_top":"Gangplank","red_jungle":"Gragas","red_mid":"Zoe","red_adc":"Aphelios","red_support":"Leona","result":"Blue"}, ...]`
 
 ## Client
