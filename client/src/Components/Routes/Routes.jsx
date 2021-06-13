@@ -1,7 +1,7 @@
 import React from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 import Dashboard from "../Dashboard/Dashboard";
-import MatchHistory from "../Header/Header";
+import MatchHistory from "../MatchHistory/MatchHistory";
 
 export default function Routes() {
 	return (
