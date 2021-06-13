@@ -27,7 +27,7 @@ router.get('/filter', MatchesController.getChampionMatchesListFilters);
  *   red_support: [champion name, unique within the team]
  *   result: ONE OF [Red, Blue]
  */
-router.post('/new', MatchesRouter.postNewMatch);
+router.post('/new', MatchesController.postNewMatch);
 
 /* PUT new details for an existing match */
 //router.put('/edit/:matchID');
