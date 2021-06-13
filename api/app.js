@@ -19,6 +19,7 @@ let db = mysql.createPool({
 // Router setup
 const indexRouter = require('./routes/indexRouter');
 const championsRouter = require('./routes/championsRouter');
+const matchesRouter = require('./routes/matchesRouter');
 
 // App setup
 const app = express();
@@ -32,6 +33,7 @@ app.use((req, res, next) => {
 // Use the router
 app.use('/', indexRouter);
 app.use('/champions', championsRouter);
+app.use('/matches', matchesRouter);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
