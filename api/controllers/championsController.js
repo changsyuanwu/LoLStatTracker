@@ -32,9 +32,9 @@ class ChampionsController {
   static async updateChampionBaseStats(req, res, next) {
     const db = req.db;
 
-    const name = req.query.name;
-    const statToUpdate = req.query.stat;
-    const statValue = parseInt(req.query.value);
+    const name = req.query.name.toLowerCase();
+    const statToUpdate = req.query.stat.toLowerCase();
+    const statValue = req.query.value;
 
     try {
       const [result] = await db.query('UPDATE champions SET ?? = ? WHERE champion_name = ?', [statToUpdate, statValue, name])
