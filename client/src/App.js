@@ -1,6 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
-import Dashboard from "./Components/Dashboard/Dashboard"
+import Dashboard from "./Components/Dashboard/Dashboard";
+import Routes from "./Components/Routes/Routes";
 
 function callAPI() {
   fetch("http://localhost:9000/")
@@ -11,7 +12,7 @@ function callAPI() {
 function App() {
   return (
     <div className="App">
-      <Dashboard />
+      <Routes />
     </div>
   );
 }
