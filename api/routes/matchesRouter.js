@@ -10,7 +10,7 @@ router.get('/', MatchesController.getMatches);
  *   position: ONE OF [all, top, jungle, mid, adc, support]
  *   outcome: ONE OF [all, win, loss]
  * 
- * Example: .../filter?name=ezreal&position=adc&outcome=win
+ * Example: .../matches/filter?name=ezreal&position=adc&outcome=win
  */
 router.get('/filter', MatchesController.getChampionMatchesListFilters);
 

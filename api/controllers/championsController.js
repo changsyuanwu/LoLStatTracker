@@ -29,6 +29,26 @@ class ChampionsController {
     }
   }
 
+  static async updateChampionBaseStats(req, res, next) {
+    const db = req.db;
+
+    const name = req.query.name;
+    const statToUpdate = req.query.stat;
+    const statValue = parseInt(req.query.value);
+
+    try {
+      const [result] = await db.query('UPDATE champions SET ?? = ? WHERE champion_name = ?', [statToUpdate, statValue, name])
+      console.log(result);
+      return res.json(result)
+    }
+    catch (err) {
+      res.status(401).json({ 
+        error: 'There was a problem processing the queried values' 
+      })
+      throw err;
+    }
+  }
+
   static async getChampionPlayStatsByName(req, res, next) {
     const db = req.db;
 
