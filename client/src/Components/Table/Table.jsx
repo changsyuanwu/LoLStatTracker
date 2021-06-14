@@ -1,26 +1,46 @@
-import React, { Component } from 'react'
+import React, { useEffect, useState } from 'react'
+import  {useSelector, useDispatch} from 'react-redux'
 import MaterialTable from 'material-table'
-
-/*
-api - not giving query results yet
-
-fetch('http://localhost:9000/test-query')
-  .then(response => response.json())
-  .then(data => console.log(data));
-*/
-
-var cols = []
-var data = []
-
+import matches from '../../services/matches'
+import { match_history } from '../Fields/fields';
 
 export default function Table() {
-    return (
-      <div style={{ maxWidth: '80%',  margin: 'auto' }}>
-        <MaterialTable
-          columns={cols}
-          data={data}
-          title="Rankings"
-        />
-      </div>
-    )
-}
+
+  const fields = useSelector(state => state.fields);
+  const dispatch = useDispatch();
+  const [arr, setData] = useState(fields);
+
+  const getallmatches = async () => {
+    try {
+      await matches.getall().then((response) => {
+        setData(response.data);
+        dispatch({ type: "ALL", data: response.data });
+      });
+      } catch (error) {
+        console.log(error);
+    }
+  }
+
+  useEffect(() => {
+    getallmatches();
+  }, []);
+
+  if (arr != null) {
+    var cols = arr;
+  } else {
+    var rows;
+  }
+
+  //  const [player] = arr.data.filter(
+  // (playername) => data.playername == playername
+  // );
+
+  return (<div style={{ maxWidth: '80%',  margin: 'auto' }}>
+      <MaterialTable
+        columns={match_history}
+        data={arr}
+        title="Rankings"
+      />
+    </div>
+  )
+  }

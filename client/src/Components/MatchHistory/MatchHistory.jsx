@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import { Container, Row, Col, Card, Form, Navbar, Nav } from "react-bootstrap";
+import { Container, Row, Col, Accordion } from "react-bootstrap";
 import styles from "./MatchHistory.module.css";
 import Header from "../Header/Header";
+import MatchTable from "../Table/MatchTable";
 
 export default class Dashboard extends Component {
     constructor(props) {
@@ -13,14 +14,14 @@ export default class Dashboard extends Component {
             <Container fluid>
                 <Header />
                 <Row className={styles.searchHeader}>
-                    Search Champion Match History
+                    <Col></Col>
+                    <Col>
+                        Search Champion Match History
+                    </Col>
+                    <Col></Col>
                 </Row>
                 <Row>
-                    <form>
-                        <input type="text" />
-                    </form>
-                </Row>
-                <Row>
+                    <MatchTable />
                 </Row>
             </Container>
         )

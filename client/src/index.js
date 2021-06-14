@@ -5,13 +5,20 @@ import './index.css';
 import App from './App';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import reportWebVitals from './reportWebVitals';
+import { Provider } from "react-redux";
+import { createStore } from 'redux';
+import roots from './Components/Fields/states';
+
+const state_reducer = createStore(roots);
 
 ReactDOM.render(
-  <BrowserRouter>
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>
-  </BrowserRouter>,
+    <BrowserRouter>
+      <React.StrictMode>
+      <Provider store={state_reducer}>
+        <App />
+        </Provider>
+      </React.StrictMode>
+    </BrowserRouter>,
   document.getElementById('root')
 );
 
