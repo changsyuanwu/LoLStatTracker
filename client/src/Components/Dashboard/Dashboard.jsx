@@ -4,10 +4,14 @@ import styles from "./Dashboard.module.css";
 import Header from "../Header/Header";
 import Table from "../Table/Table.jsx";
 
+
 export default class Dashboard extends Component {
     constructor(props) {
         super(props);
-    }
+        //this.state = {
+        //    data: []
+        //};
+    };
 
     render() {
         return (
