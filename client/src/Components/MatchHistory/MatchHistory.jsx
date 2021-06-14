@@ -21,19 +21,6 @@ export default class Dashboard extends Component {
                     <Col></Col>
                 </Row>
                 <Row>
-                    <form className={styles.inputSection}>
-                        <input type="text" />
-                        <input type="submit" />
-                    </form>
-                </Row>
-                <Row>
-                    <Col></Col>
-                    <Col>
-                        Champion Match History Results
-                    </Col>
-                    <Col></Col>
-                </Row>
-                <Row>
                     <MatchTable />
                 </Row>
             </Container>
