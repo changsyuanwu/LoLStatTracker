@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import  {useSelector, useDispatch} from 'react-redux'
 import MaterialTable from 'material-table'
-import matches from '../../services/matches'
+import champion from '../../services/matches'
 import { match_history } from '../Fields/fields';
 
 export default function Table() {
@@ -10,9 +10,9 @@ export default function Table() {
   const dispatch = useDispatch();
   const [arr, setData] = useState(fields);
 
-  const getallmatches = async () => {
+  const getlist = async () => {
     try {
-      await matches.getall().then((response) => {
+      await champion.getlist().then((response) => {
         setData(response.data);
         dispatch({ type: "ALL", data: response.data });
       });
@@ -22,15 +22,10 @@ export default function Table() {
   }
 
   useEffect(() => {
-    getallmatches();
+    getlist();
   }, []);
 
-  if (arr != null) {
-    var cols = arr;
-  } else {
-    var rows;
-  }
-
+  console.log(arr);
   //  const [player] = arr.data.filter(
   // (playername) => data.playername == playername
   // );
@@ -39,7 +34,7 @@ export default function Table() {
       <MaterialTable
         columns={match_history}
         data={arr}
-        title="Rankings"
+        title="Champions Data"
       />
     </div>
   )
