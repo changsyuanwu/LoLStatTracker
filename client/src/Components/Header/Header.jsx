@@ -19,7 +19,8 @@ export default class Header extends Component {
                 </Col>
                 <Col xs={3}>
                     <Nav className="navBar">
-                        <Nav.Link href="/dashboard">Main</Nav.Link>
+                        <Nav.Link href="/mainpage">Home</Nav.Link>
+                        <Nav.Link href="/dashboard">Dashboard</Nav.Link>
                         <Nav.Link href="/match-history">Match History</Nav.Link>
                     </Nav>
                 </Col>
