@@ -25,6 +25,10 @@ const matchesRouter = require('./routes/matchesRouter');
 // App setup
 const app = express();
 
+// Add cors
+app.use(cors());
+app.options('*', cors());  // enable pre-flight
+
 // Make our db accessible to our router
 app.use((req, res, next) => {
   req.db = db;
@@ -46,7 +50,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(cors());
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
