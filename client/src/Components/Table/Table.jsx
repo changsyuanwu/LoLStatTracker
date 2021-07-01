@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import  {useSelector, useDispatch} from 'react-redux'
 import MaterialTable from 'material-table'
-import champion from '../../services/matches'
-import { match_history } from '../Fields/fields';
+import champion from '../../services/champion'
+import { champions } from '../Fields/fields';
 
 export default function Table() {
 
@@ -25,17 +25,38 @@ export default function Table() {
     getlist();
   }, []);
 
+  const getplayerstat = async () => {
+      try {
+        await champion.getlist().then((response) => {
+          setData(response.data);
+          dispatch({ type: "ALL", data: response.data });
+        });
+        } catch (error) {
+          console.log(error);
+      }
+  }
+  useEffect(() => {
+    getplayerstat();
+  }, []);
+
   console.log(arr);
-  //  const [player] = arr.data.filter(
-  // (playername) => data.playername == playername
-  // );
+
+  let array = arr;
+  let emptylst=[];
+  if (array != null) {
+    for(var i=0; i < arr.length; i++) {
+      emptylst.push({"champion_name": arr[i] });
+    }
+  }
+
+  console.log(emptylst);
 
   return (<div style={{ maxWidth: '80%',  margin: 'auto' }}>
       <MaterialTable
-        columns={match_history}
-        data={arr}
+        columns={champions}
+        data={emptylst}
         title="Champions Data"
       />
     </div>
   )
-  }
+}

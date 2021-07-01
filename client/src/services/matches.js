@@ -2,7 +2,7 @@ import axios from "axios";
 
 const api =  "http://localhost:9000/";
 
-export class matches {
+class matches {
     getall() {
         const res = axios.get(api + 'matches/');
         console.log(res);
@@ -18,26 +18,7 @@ export class matches {
     }
 }
 
-class champion {
-    getlist() {
-        const res = axios.get(api + 'champions/list');
-        console.log(res);
-        return res;
-    }
-    getplayerstat(name) {
-        const res = axios.get(api + 'champions/play-stats/', {params : {name}});
-        console.log(res);
-        return res;
-    }
-    getbasestat(name) {
-        const res = axios.get(api + 'champions/stats/', {params : {name}});
-        console.log(res);
-        return res;
-    }
-    postbasestat(data) {
-        axios.post(api + 'champions/update-stats', {data});
-    }
-}
+export default new matches;
 
 /* GET champion base stats by name */
 //router.get('/stats/:name', ChampionsController.getChampionStatsByName);
@@ -75,4 +56,3 @@ class champion {
 
 // "matches will be changed to 'data' 
 // after we implement the other features as well"
-export default new champion();

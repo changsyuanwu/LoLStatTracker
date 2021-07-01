@@ -75,6 +75,17 @@ export const match_history = [
     {title: "Result", field: "result" }
 ];
 
+export const champions = [ 
+  {title: "Name", field: "champion_name" },
+  {title: "Title", field: "champion_title" },
+  {title: "Class", field: "class" },
+  {title: "Style", field: "playstyle" },
+  {title: "Release", field: "date_release" },
+  {title: "Blue Esscence Price", field: "blue_essence_price" },
+  {title: "RP Price", field: "rp_price" }
+];
+
+
 export const match_card = [
     {title: "ADC", field: "blue_adc" }, 
     {title: "Jungle", field: "blue_jungle" },
