@@ -9,6 +9,8 @@ export default function Table() {
   const fields = useSelector(state => state.fields);
   const dispatch = useDispatch();
   const [arr, setData] = useState(fields);
+  const [newvar, newsetData] = useState(fields);
+
 
   const getlist = async () => {
     try {
@@ -25,27 +27,24 @@ export default function Table() {
     getlist();
   }, []);
 
-  const getplayerstat = async () => {
+  const getplayerstat = async (item) => {
       try {
-        await champion.getlist().then((response) => {
-          setData(response.data);
+        await champion.getplayerstat(item).then((response) => {
+          newsetData(response.data);
           dispatch({ type: "ALL", data: response.data });
         });
         } catch (error) {
           console.log(error);
       }
   }
-  useEffect(() => {
-    getplayerstat();
-  }, []);
-
-  console.log(arr);
 
   let array = arr;
-  let emptylst=[];
+  var emptylst=[];
   if (array != null) {
     for(var i=0; i < arr.length; i++) {
       emptylst.push({"champion_name": arr[i] });
+      getplayerstat(arr[i]);
+      console.log(newvar); 
     }
   }
 
