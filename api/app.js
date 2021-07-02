@@ -8,13 +8,18 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const mysql = require('mysql2');
 const cors = require('cors');
+const session = require('express-session');
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
+const bcrypt = require('bcrypt');
 
 // Setup DB
 let db = mysql.createPool({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
-  database: process.env.DB_DATABASE
+  database: process.env.DB_DATABASE,
+  stringifyObjects: true
 }).promise();
 
 // Router setup
@@ -35,10 +40,43 @@ app.use((req, res, next) => {
   next();
 });
 
-// Use the router
-app.use('/', indexRouter);
-app.use('/champions', championsRouter);
-app.use('/matches', matchesRouter);
+// Passport configuration
+passport.use(
+  new LocalStrategy(
+    { passReqToCallback: true },
+    (req, username, password, done) => {
+      // find user
+      db.query("SELECT * FROM users WHERE username = ?", [ username ], function (err, rows) {
+        if (err)
+          return done(err);
+        if (!rows.length) {
+          return done("no user found", false);
+        }
+
+        let user = rows[0];
+
+        bcrypt.compare(password, user.password, (err, isMatch) => {
+          if (err) throw err;
+
+          if (isMatch) {
+            return done(null, user);
+          }
+          else {
+            return done("incorrect password", false);
+          }
+        });
+      });
+    })      
+);
+passport.serializeUser(function (user, done) {
+  done(null, user.username);
+});
+passport.deserializeUser(function (username, done) {
+  // find user
+  db.query("SELECT * FROM users WHERE username = ?", [ username ], function (err, rows) {	
+    done(err, rows[0]);
+  });
+});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -50,6 +88,27 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(passport.initialize());
+app.use(passport.session());
+
+// Setup session (expires in 15 minutes)
+app.use(session({
+  secret: process.env.SESSION_SECRET,
+  name: process.env.SESSION_COOKIE_NAME,
+  resave: true,
+  saveUninitialized: true,
+  rolling: true,
+  cookie: {
+    sameSite: "none",
+    httpOnly: true,
+    maxAge: 900000
+  }
+}));
+
+// Add the routers to the app
+app.use('/', indexRouter);
+app.use('/champions', championsRouter);
+app.use('/matches', matchesRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
