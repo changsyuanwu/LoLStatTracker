@@ -37,7 +37,6 @@ export default class Dashboard extends Component {
                     </Col>
                 </Row>
                 <Row>
-                Query Results:
                     <Table />
                 </Row>
             </Container>

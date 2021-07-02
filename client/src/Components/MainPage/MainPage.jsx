@@ -3,9 +3,11 @@ import { Container, Row, Col} from "react-bootstrap";
 import styles from "./MainPage.module.css";
 import Header from "../Header/Header";
 import Table from "../Table/Table.jsx";
+import source from "../../Assets/Videos/league.mp4"
 
 
 export default class MainPage extends Component {
+    // eslint-disable-next-line no-useless-constructor
     constructor(props) {
         super(props);
         //this.state = {
@@ -13,16 +15,16 @@ export default class MainPage extends Component {
         //};
     };
 
+    // <source src="http://www.sample-videos.com/video/mp4/720/big_buck_bunny_720p_1mb.mp4" type="video/mp4" />
+    // <source src="..\..\Assets\Videos\league.mp4" type="video/mp4" />
     render() {
         return (
-            <Container fluid>
-            <Header />
-            <Row className={styles.queryInfo}>
-                <video loop style={{position: "fixed", padding: "25%", width: "100%", left: 0, top: 0}}>
-                    <source src="..\..\Assets\Videos\league.mp4" type="video/mp4" />
+            <div>
+                <Header />
+                <video playsInline autoPlay loop>
+                    <source src={source} type="video/mp4" />
                 </video>
-            </Row>
-        </Container>
+            </div>
         )
     }
 }

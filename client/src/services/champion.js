@@ -9,13 +9,11 @@ class champion {
         return res;
     }
     getplayerstat(name) {
-        const res = axios.get(api + 'champions/play-stats/', {params : {name}});
-        console.log(res);
+        const res = axios.get(api + 'champions/play-stats/' + name);
         return res;
     }
     getbasestat(name) {
-        const res = axios.get(api + 'champions/stats/', {params : {name}});
-        console.log(res);
+        const res = axios.get(api + 'champions/stats/' + name);
         return res;
     }
     postbasestat(data) {

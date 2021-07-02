@@ -12,12 +12,12 @@ export default class Header extends Component {
         return (
             <Row className={styles.Header}>
                 <img src={Logo} className={styles.Logo} />
-                <Col>
+                <Col xs={6}>
                     <div className={styles.title}>
                         CS348 League of Legends Project
                     </div>
                 </Col>
-                <Col xs={3}>
+                <Col xs={5}>
                     <Nav className="navBar">
                         <Nav.Link href="/mainpage">Home</Nav.Link>
                         <Nav.Link href="/dashboard">Dashboard</Nav.Link>
