@@ -8,13 +8,11 @@ class matches {
         console.log(res);
         return res;
     }
-    getallfilter() {
-        const res = axios.get(api + 'matches/filter');
-         console.log(res);
-         return res;
-    }
     postmatch(data){
-        axios.post('/new', {data});
+        axios.post(api + 'matches/new', {data});
+    }
+    deletematch(data) {
+        axios.delete(api + 'matches/delete', {data});
     }
 }
 

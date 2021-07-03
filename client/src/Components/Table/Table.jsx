@@ -11,7 +11,6 @@ export default function Table() {
   const [arr, setData] = useState(fields);
   const [newvar, newsetData] = useState(fields);
 
-
   const getlist = async () => {
     try {
       await champion.getlist().then((response) => {
@@ -41,20 +40,29 @@ export default function Table() {
   let array = arr;
   var emptylst=[];
   if (array != null) {
-    for(var i=0; i < arr.length; i++) {
+    for(var i=0; i < 10; i++) {
       emptylst.push({"champion_name": arr[i] });
-      getplayerstat(arr[i]);
-      console.log(newvar); 
+      //console.log(getplayerstat(arr[i]));
     }
   }
 
-  console.log(emptylst);
+  const [rows, setRow] = useState(emptylst);
 
   return (<div style={{ maxWidth: '80%',  margin: 'auto' }}>
       <MaterialTable
-        columns={champions}
-        data={emptylst}
         title="Champions Data"
+        columns={champions}
+        data={rows}
+        editable={{
+          onRowAdd: newRow =>
+            new Promise((resolve, reject) => {
+              setTimeout(() => {
+                setRow([...rows, newRow]);
+                
+                resolve();
+              }, 1000)
+            }) 
+        }}
       />
     </div>
   )

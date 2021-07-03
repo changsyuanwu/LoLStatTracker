@@ -1,8 +1,6 @@
 import React, { Component } from "react";
-import { Container, Row, Col} from "react-bootstrap";
 import styles from "./MainPage.module.css";
 import Header from "../Header/Header";
-import Table from "../Table/Table.jsx";
 import source from "../../Assets/Videos/league.mp4"
 
 
