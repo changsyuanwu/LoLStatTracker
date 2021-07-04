@@ -26,6 +26,7 @@ let db = mysql.createPool({
 const indexRouter = require('./routes/indexRouter');
 const championsRouter = require('./routes/championsRouter');
 const matchesRouter = require('./routes/matchesRouter');
+const usersRouter = require('./routes/usersRouter');
 
 // App setup
 const app = express();
@@ -109,6 +110,7 @@ app.use(session({
 app.use('/', indexRouter);
 app.use('/champions', championsRouter);
 app.use('/matches', matchesRouter);
+app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
