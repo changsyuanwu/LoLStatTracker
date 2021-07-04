@@ -11,6 +11,10 @@ export default class Header extends Component {
     render() {
         return (
             <Row className={styles.Header}>
+                <div className={styles.Auth}>
+                    <a href="/login" className={styles.Link}>Login</a>
+                    <a href="/register" className={styles.Link}>Register</a>
+                </div>
                 <img src={Logo} className={styles.Logo} />
                 <Col xs={6}>
                     <div className={styles.title}>
