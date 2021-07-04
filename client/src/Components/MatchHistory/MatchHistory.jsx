@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Container, Row, Col, Accordion } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 import styles from "./MatchHistory.module.css";
 import Header from "../Header/Header";
 import MatchTable from "../Table/MatchTable";
