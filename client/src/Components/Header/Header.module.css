@@ -22,3 +22,13 @@
     float: right;
     text-align: right;
 }
+
+.Auth {
+    font-size: 17px;
+    text-align: right;
+}
+
+.Link {
+    text-decoration: none;
+    padding: 10px;
+}
