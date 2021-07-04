@@ -30,6 +30,6 @@ router.get('/filter', MatchesController.getChampionMatchesListFilters);
 router.post('/new', MatchesController.postNewMatch);
 
 /* PUT new details for an existing match */
-//router.put('/edit/:matchID');
+router.put('/edit/:matchID');
 
 module.exports = router;
