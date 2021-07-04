@@ -100,9 +100,8 @@ class MatchesController {
       req.body.blue_mid, req.body.blue_adc, req.body.blue_support,
       req.body.red_top, req.body.red_jungle, req.body.red_mid, req.body.red_adc,
       req.body.red_support];
-    let [foundChampion];
     for (const championName in championsToCheck) {
-      foundChampion = await db.query(`SELECT COUNT(*) FROM champions 
+      let [foundChampion] = await db.query(`SELECT COUNT(*) FROM champions 
         WHERE champion_name = LOWER(?)`, [championName]);
       if (foundChampion[0].count == 0) {
         return res.status(400).json({
@@ -145,9 +144,8 @@ class MatchesController {
       req.body.blue_mid, req.body.blue_adc, req.body.blue_support,
       req.body.red_top, req.body.red_jungle, req.body.red_mid, req.body.red_adc,
       req.body.red_support];
-    let [foundChampion];
     for (const championName in championsToCheck) {
-      foundChampion = await db.query(`SELECT COUNT(*) FROM champions 
+      let [foundChampion] = await db.query(`SELECT COUNT(*) FROM champions 
         WHERE champion_name = LOWER(?)`, [championName]);
       if (foundChampion[0].count == 0) {
         return res.status(400).json({
