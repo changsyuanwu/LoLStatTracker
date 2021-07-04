@@ -16,7 +16,7 @@ Make sure that the MySQL server is running on your computer with the following s
 
 Navigate to the `api` folder and run `mysql -u root test -p` and enter `password` when prompted.
 
-Once you have entered the mysql shell (you should see `mysql >` in your command line), run `source ./data/LOL_champions_stats.sql`, `source ./data/matches2020.sql`, and `source ./data/users.sql` to create and populate the required tables.
+Once you have entered the mysql shell (you should see `mysql >` in your command line), run `source ./data/champions.sql`, `source ./data/matches.sql`, and `source ./data/users.sql` to create and populate the required tables.
 
 
 # Running the program
