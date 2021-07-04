@@ -6,23 +6,20 @@ import Header from "../Header/Header";
 
 const Login = () => {
 
-    const [password1, changePassword1] = useState("");
-    const [password2, changePassword2] = useState("");
+    const [username, changeUsername] = useState("");
+    const [password, changePassword] = useState("");
 
-    function submitCredentials(e) {
-        if (password1 !== password2) {
-            alert("passwords don't match");
-            e.preventdefault();
-            return false;
-        }
+    function submitLogin(e) {
+        //localStorage.removeItem('CS348FinalProjectCredentials');
+        localStorage.setItem('CS348FinalProjectCredentials', "loginYes");
     }
 
-    function password1Change(e) {
-        changePassword1(e.target.value);
+    function usernameChange(e) {
+        changeUsername(e.target.value);
     }
 
-    function password2Change(e) {
-        changePassword2(e.target.value);
+    function passwordChange(e) {
+        changePassword(e.target.value);
 
     }
 
@@ -34,9 +31,9 @@ const Login = () => {
                     Please enter username and password Information to Register as a new User
                 </div>
                 <form>
-                    Username: <input type="text" className={styles.input} required/> <br/>
-                    Password: <input type="password"  className={styles.input} onChange={password1Change} required/> <br/>
-                    <button className={styles.input} onClick={submitCredentials}>Login</button>
+                    Username: <input type="text" className={styles.input} onChange={usernameChange} required/> <br/>
+                    Password: <input type="password"  className={styles.input} onChange={passwordChange} required/> <br/>
+                    <button className={styles.input} onClick={submitLogin}>Login</button>
                 </form>
             </Row>
         </Container>
