@@ -8,11 +8,22 @@ export default class Header extends Component {
         super(props);
     }
 
+    logout = () => {
+        localStorage.removeItem('CS348FinalProjectCredentials');
+    }
+
     render() {
+        let auth = (localStorage.getItem('CS348FinalProjectCredentials') === null) ? (
+            <a href="/login" className={styles.Link}>Login</a>
+        ) :
+        (
+            <a href="/" onClick={this.logout} className={styles.Link}>Logout</a>
+        );
+
         return (
             <Row className={styles.Header}>
                 <div className={styles.Auth}>
-                    <a href="/login" className={styles.Link}>Login</a>
+                    {auth}
                     <a href="/register" className={styles.Link}>Register</a>
                 </div>
                 <img src={Logo} className={styles.Logo} />
