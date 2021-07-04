@@ -104,7 +104,7 @@ class MatchesController {
     for (const championName in championsToCheck) {
       foundChampion = await db.query(`SELECT COUNT(*) FROM champions 
         WHERE champion_name = LOWER(?)`, [championName]);
-      if (foundChampion[0] == 0) {
+      if (foundChampion[0].count == 0) {
         return res.status(400).json({
           error: championName + " is not a valid champion name"
         });
@@ -149,15 +149,15 @@ class MatchesController {
     for (const championName in championsToCheck) {
       foundChampion = await db.query(`SELECT COUNT(*) FROM champions 
         WHERE champion_name = LOWER(?)`, [championName]);
-      if (foundChampion[0] == 0) {
+      if (foundChampion[0].count == 0) {
         return res.status(400).json({
           error: championName + " is not a valid champion name"
         });
       }
     }
     let [foundMatch] = await db.query(`SELECT COUNT(*) FROM matches 
-      WHERE match_id = ?`, req.params.matchID);
-      if (foundMatch[0] == 0) {
+      WHERE match_id = ?`, [req.params.matchID]);
+      if (foundMatch[0].count == 0) {
         return res.status(400).json({
           error: "match ID " + req.params.matchID + " does not exist"
         });
