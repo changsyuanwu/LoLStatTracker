@@ -38,7 +38,6 @@ class ChampionsController {
 
     try {
       const [result] = await db.query('UPDATE champions SET ?? = ? WHERE champion_name = ?', [statToUpdate, statValue, name])
-      console.log(result);
       return res.json(result)
     }
     catch (err) {
