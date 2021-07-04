@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const passport = require('passport');
-const { ensureAuthenticated } = require('../config/auth.js');
+const { ensureAuthenticated } = require('../auth/auth.js');
 const UsersController = require('../controllers/usersController.js');
 
 /* PUT to change password service */
-router.put('/change-password', ensureAuthenticated, UsersController.postChangePassword);
+router.put('/change-password', ensureAuthenticated, UsersController.putChangePassword);
 
 /* POST to login/authentication service */
 router.post('/authenticate',

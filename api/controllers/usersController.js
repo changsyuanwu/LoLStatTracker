@@ -1,5 +1,4 @@
 const bcrypt = require('bcrypt');
-const ErrorHandler = require('../utils/errorHandler.js');
 
 class UsersController {
 
@@ -25,7 +24,7 @@ class UsersController {
       bcrypt.genSalt(10)
       .then(salt => {
         bcrypt.hash(userPassword, salt)
-          .then(hash => {
+          .then(async hash => {
             // create user object
             const user = {
               username: userName,
@@ -61,7 +60,7 @@ class UsersController {
           bcrypt.genSalt(10)
             .then(salt => {
               bcrypt.hash(newPassword, salt)
-                .then(hash => {
+                .then(async hash => {
                   // save pass to hash
                   const hashedPassword = hash;
                   try {
