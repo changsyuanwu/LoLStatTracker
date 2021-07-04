@@ -59,7 +59,7 @@ We will be referring to `http://localhost:9000` as `...` since all routes have t
   * GET `.../champions/play-stats/<name>` will return an object containing the champion whose `name` was given's win rate, play rate, number of matches won, and number of matches played
     * Example: `.../champions/play-stats/ezreal` will return `{"champion":"ezreal","winrate":0.490442054958184,"playrate":0.2982893799002138,"won":821,"played":1674}`
 
-  * POST `.../champions/update-stats?name=<name>&stat=<stat>&value=<value>` will change the `stat` of the champion given by `name` to `value`
+  * PUT `.../champions/update-stats?name=<name>&stat=<stat>&value=<value>` will change the `stat` of the champion given by `name` to `value`
     * Example `.../champions/update-stats?name=ezreal&stat=health&value=500` will set Ezreal's health stat to 500
 
 ### Matches
