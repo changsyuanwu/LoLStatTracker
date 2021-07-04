@@ -55,7 +55,7 @@ passport.use(
 
         let user = rows[0];
 
-        bcrypt.compare(password, user.password, (err, isMatch) => {
+        bcrypt.compare(password, user.pass, (err, isMatch) => {
           if (err) throw err;
 
           if (isMatch) {
