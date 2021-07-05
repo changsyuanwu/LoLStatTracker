@@ -11,7 +11,8 @@ const body = {
   red_mid: "Ahri",
   red_adc: "Tristana",
   red_support: "Rakan",
-  result: "Blue"
+  result: "Blue",
+  patch: "11.0"
 }
 
 fetch("http://localhost:9000/matches/new", {
