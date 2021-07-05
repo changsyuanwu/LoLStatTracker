@@ -41,8 +41,8 @@ class ChampionsController {
       return res.status(200).json(result)
     }
     catch (err) {
-      res.status(401).json({ 
-        error: 'There was a problem processing the queried values' 
+      res.status(400).json({
+        error: 'There was a problem processing the queried values'
       })
       throw err;
     }
@@ -52,6 +52,14 @@ class ChampionsController {
     const db = req.db;
 
     const name = req.params.name.toLowerCase();
+
+    let currentUser;
+    if (req.user) {
+      currentUser = req.user.username;
+    }
+    else {
+      currentUser = "SYSTEM";
+    }
 
     try {
       const [numMatchesWon] = await db.query(
@@ -75,8 +83,9 @@ class ChampionsController {
             LOWER(red_support)
           )
           AND result = 'Red'
-        )`,
-        [name, name]
+        )
+        AND author = ?`,
+        [name, name, currentUser]
       );
 
       const [numMatchesPlayed] = await db.query(
@@ -98,16 +107,20 @@ class ChampionsController {
             LOWER(red_adc), 
             LOWER(red_support)
           )
-        )`,
-        [name, name]
+        )
+        AND author = ?`,
+        [name, name, currentUser]
       );
 
-      const [totalMatchesPlayed] = await db.query(`SELECT COUNT(*) AS count FROM matches`);
+      const [totalMatchesPlayed] = await db.query(
+        `SELECT COUNT(*) AS count FROM matches WHERE author = ?`,
+        [ currentUser ]
+      );
 
       const winrate = numMatchesWon[0].count / numMatchesPlayed[0].count;
       const playrate = numMatchesPlayed[0].count / totalMatchesPlayed[0].count;
 
-      return res.json({ 
+      return res.json({
         champion: name,
         winrate: winrate,
         playrate: playrate,
