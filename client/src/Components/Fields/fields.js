@@ -1,4 +1,3 @@
-import { createContext, useState } from "react";
 /*
 export const MatchFields = createContext({
     blue_adc: "ADC",
@@ -74,6 +73,15 @@ export const match_history = [
     {title: "Match Number", field: "match_id" },
     {title: "Result", field: "result" }
 ];
+
+export const champions = [ 
+  {title: "Champion", field: "champion" },
+  {title: "Winrate", field: "winrate" },
+  {title: "Playrate", field: "playrate" },
+  {title: "Won", field: "won" },
+  {title: "Played", field: "played" }
+];
+
 
 export const match_card = [
     {title: "ADC", field: "blue_adc" }, 

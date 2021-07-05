@@ -17,6 +17,16 @@ export default class Dashboard extends Component {
         return (
             <Container fluid>
                 <Header />
+                <Row>
+                    <Table />
+                </Row>
+            </Container>
+        )
+    }
+}
+
+/*
+Add Filtering information after:
                 <Row className={styles.queryInfo}>
                     Query Information
                     <Col>
@@ -36,11 +46,4 @@ export default class Dashboard extends Component {
                         </form>
                     </Col>
                 </Row>
-                <Row>
-                Query Results:
-                    <Table />
-                </Row>
-            </Container>
-        )
-    }
-}
+*/

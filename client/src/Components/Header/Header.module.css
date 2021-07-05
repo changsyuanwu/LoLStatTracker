@@ -1,9 +1,10 @@
 .Header {
     background-color: black;
     color: white;
-    padding-top: 2.5%;
-    padding-bottom: 2.5%;
-    padding-left: 2%;
+    padding-top: 0.5%;
+    padding-bottom: 1.5%;
+    padding-left: 0.5%;
+    padding-right: 0%;
     text-align: left;
     font-size: 30px;
 }
@@ -19,4 +20,15 @@
 
 .navBar {
     float: right;
+    text-align: right;
+}
+
+.Auth {
+    font-size: 17px;
+    text-align: right;
+}
+
+.Link {
+    text-decoration: none;
+    padding: 10px;
 }
