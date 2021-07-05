@@ -1,4 +1,5 @@
 const express = require('express');
+const { ensureAuthenticated } = require('../auth/auth.js');
 const MatchesController = require('../controllers/matchesController');
 const router = express.Router();
 
@@ -9,8 +10,10 @@ router.get('/', MatchesController.getMatches);
  *   name: name of the champion being queried, non-null
  *   position: ONE OF [all, top, jungle, mid, adc, support]
  *   outcome: ONE OF [all, win, loss]
+ *   patch: patch version [e.g., 11.0]. Periods may need to be escaped (use %2E)
+ * All query values are optional.
  * 
- * Example: .../matches/filter?name=ezreal&position=adc&outcome=win
+ * Example: .../matches/filter?name=ezreal&position=adc&outcome=win&patch=11%2E0
  */
 router.get('/filter', MatchesController.getChampionMatchesListFilters);
 
@@ -26,10 +29,15 @@ router.get('/filter', MatchesController.getChampionMatchesListFilters);
  *   red_adc: [champion name, unique within the team]
  *   red_support: [champion name, unique within the team]
  *   result: ONE OF [Red, Blue]
+ *   patch: patch version [e.g., 11.0]. Periods may need to be escaped (use %2E)
+ *   author: the username of the current authenticated user that created this entry
+ * All body values are mandatory.
  */
-router.post('/new', MatchesController.postNewMatch);
+router.post('/new', ensureAuthenticated, MatchesController.postNewMatch);
 
-/* PUT new details for an existing match */
-//router.put('/edit/:matchID');
+/* PUT updated details for an existing match:
+ * Body requires same fields as POST new match details, except for author. 
+ */
+router.put('/edit/:matchID', ensureAuthenticated, MatchesController.updateMatch);
 
 module.exports = router;
