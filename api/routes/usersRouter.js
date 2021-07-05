@@ -11,6 +11,9 @@ router.put('/change-password', ensureAuthenticated, UsersController.putChangePas
 router.post('/authenticate',
   passport.authenticate('local'),
   (req, res, next) => {
+    res.status(200).json({
+      message: "success"
+    });
   });
 
 /* POST to Add User Service */
