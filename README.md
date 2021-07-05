@@ -70,6 +70,11 @@ We will be referring to `http://localhost:9000` as `...` since all routes have t
   * GET `.../matches/filter?name=<name>&position=<all/top/jungle/mid/adc/support>&outcome=<all/win/loss>` will return an array of matches with the champion given by `name` being played in `position` with the game outcome being `outcome`
     * Example: `.../matches/filter?name=ezreal&position=adc&outcome=win` will return all matches with `Ezreal` being played in the `adc` position with the outcome being a `win` for Ezreal's team `[{"match_id":61,"blue_top":"Aatrox","blue_jungle":"Gragas","blue_mid":"Leblanc","blue_adc":"Aphelios","blue_support":"Leona","red_top":"Urgot","red_jungle":"Lee Sin","red_mid":"Nautilus","red_adc":"Ezreal","red_support":"Braum","result":"Red"},{"match_id":79,"blue_top":"Renekton","blue_jungle":"Elise","blue_mid":"Qiyana","blue_adc":"Ezreal","blue_support":"Braum","red_top":"Gangplank","red_jungle":"Gragas","red_mid":"Zoe","red_adc":"Aphelios","red_support":"Leona","result":"Blue"}, ...]`
 
+  * POST `.../matches/new` creates a new match with fields defined in the response body. All fields must be present. The user must be authenticated. See the examples for the GET requests for the field names.
+
+  * PUT `.../matches/edit/<matchID>` updates a match with edits defined in the response body. All fields must be present. The user must be authenticated and must be the author of the match. See the examples for the GET requests for the field names.
+    * Example: `.../matches/edit/2` will edit the match with ID 2.
+
 ### Users (usersController.js)
 
   * POST `.../users/authenticate` will attempt to authenticate a user based on the `username` and `password` fields in the request body
@@ -79,6 +84,8 @@ We will be referring to `http://localhost:9000` as `...` since all routes have t
   * PUT `.../users/change-password` will attempt to change a user's password to the `newPassword` field, verifying their identity using the `oldPassword` field in the request body
 
 ## Client
+
+Can view match history on the dashboard
 
 Can view match history on the match history page
 
