@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Container, Row, Col} from "react-bootstrap";
+import API from '../../services/api';
+import axios from "axios";
 import styles from "./Login.module.css";
 import Header from "../Header/Header";
 
@@ -10,9 +12,19 @@ const Login = () => {
     const [password, changePassword] = useState("");
 
     function submitLogin(e) {
-        //localStorage.removeItem('CS348FinalProjectCredentials');
-        localStorage.setItem('CS348FinalProjectCredentials', "loginYes");
+        e.preventDefault();
+        axios.post(API + 'users/authenticate', {
+            username: username,
+            password: password
+        })
+        .then((response) => {
+            localStorage.setItem('CS348FinalProjectCredentials', "loginYes");
+            window.location.reload();
+        }).catch((error) => {
+            alert("invalid credentials");
+        })
     }
+    
 
     function usernameChange(e) {
         changeUsername(e.target.value);
@@ -20,7 +32,6 @@ const Login = () => {
 
     function passwordChange(e) {
         changePassword(e.target.value);
-
     }
 
     return (
