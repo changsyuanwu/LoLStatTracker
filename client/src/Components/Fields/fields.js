@@ -75,13 +75,11 @@ export const match_history = [
 ];
 
 export const champions = [ 
-  {title: "Name", field: "champion_name" },
-  {title: "Title", field: "champion_title" },
-  {title: "Class", field: "class" },
-  {title: "Style", field: "playstyle" },
-  {title: "Release", field: "date_release" },
-  {title: "Blue Esscence Price", field: "blue_essence_price" },
-  {title: "RP Price", field: "rp_price" }
+  {title: "Champion", field: "champion" },
+  {title: "Winrate", field: "winrate" },
+  {title: "Playrate", field: "playrate" },
+  {title: "Won", field: "won" },
+  {title: "Played", field: "played" }
 ];
 
 
