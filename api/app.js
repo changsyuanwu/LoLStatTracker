@@ -32,7 +32,7 @@ const usersRouter = require('./routes/usersRouter');
 const app = express();
 
 // Add cors
-app.use(cors());
+app.use(cors({ credentials: true, origin: 'localhost:9000'}));
 app.options('*', cors());  // enable pre-flight
 
 // Make our db accessible to our router
@@ -46,16 +46,12 @@ passport.use(
   new LocalStrategy(
     { passReqToCallback: true },
     async (req, username, password, done) => {
-      // find user
       const db = req.db;
 
-      console.log(username + " " + password);
-
       try {
+        // try to find the user
         const [ rows ] = await db.query("SELECT * FROM users WHERE username = ?", [ username ]);
         
-        console.log(rows);
-
         if (!rows.length) {
           return done(null, false, { message: "no user found" });
         }
