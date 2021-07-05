@@ -5,7 +5,7 @@ const user = {
   password: "password"
 };
 
-// create a new user with username "test@example.com" and password "password"
+// try to authenticate a user with username "test@example.com" and password "password"
 fetch("http://localhost:9000/users/authenticate", {
   method: 'POST',
   body: JSON.stringify(user),

@@ -4,7 +4,7 @@ module.exports = {
       return next();
     }
     return res.status(401).json({
-      error: "unauthorized"
+      error: "unauthorized, please log in"
     });
   }
 };
