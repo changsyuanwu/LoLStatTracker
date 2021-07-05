@@ -1,0 +1,29 @@
+.Header {
+    background-color: black;
+    color: white;
+    padding-top: 2.5%;
+    padding-bottom: 2.5%;
+    padding-left: 2%;
+    text-align: left;
+    font-size: 30px;
+}
+
+.Logo {
+    height: 200px;
+    width: 30px;
+}
+
+.title {
+    margin-top: 5px;
+    text-align: center;
+    font-size: 24px;
+}
+
+.queryInfo {
+    margin-top: 5%;
+    margin-bottom: 20%;
+}
+
+.navBar {
+    float: right;
+}

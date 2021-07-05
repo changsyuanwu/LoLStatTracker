@@ -5,6 +5,7 @@ import MatchHistory from "../MatchHistory/MatchHistory";
 import MainPage from "../MainPage/MainPage";
 import Register from "../Register/Register";
 import Login from "../Login/Login";
+import Champions from "../Champions/Champions";
 
 export default function Routes() {
 	return (
@@ -31,6 +32,9 @@ export default function Routes() {
 			</Route>
 			<Route exact path="/login">
 				<Login />
+			</Route>
+			<Route path="/champions">
+				<Champions />
 			</Route>
 		</Switch>
 	);

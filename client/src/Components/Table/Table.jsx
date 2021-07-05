@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react'
 import  {useSelector, useDispatch} from 'react-redux'
+import { useHistory } from "react-router-dom";
 import MaterialTable from 'material-table'
 import champion from '../../services/champion'
 import { champions } from '../Fields/fields';
@@ -7,6 +8,7 @@ import { List } from '@material-ui/core';
 
 export default function Table() {
   
+  let history = useHistory();
   let lst = []
   const fields = useSelector(state => state.fields);
   const dispatch = useDispatch();
@@ -86,6 +88,16 @@ export default function Table() {
           toolbar: true,
           paging: true
         }}
+        actions={[
+          {
+            icon: "Search",
+            tooltip: "Champion's stats",
+            onClick: (event, rowData) => {
+              console.log(rowData);
+              history.push("/champions/" + rowData.champion);
+            }
+          }
+        ]}
         /*editable={{
           onRowAdd: newRow =>
             new Promise((resolve, reject) => {
