@@ -45,15 +45,21 @@ app.use((req, res, next) => {
 passport.use(
   new LocalStrategy(
     { passReqToCallback: true },
-    (req, username, password, done) => {
+    async (req, username, password, done) => {
       // find user
-      db.query("SELECT * FROM users WHERE username = ?", [ username ], function (err, rows) {
-        if (err)
-          return done(err);
-        if (!rows.length) {
-          return done("no user found", false);
-        }
+      const db = req.db;
 
+      console.log(username + " " + password);
+
+      try {
+        const [ rows ] = await db.query("SELECT * FROM users WHERE username = ?", [ username ]);
+        
+        console.log(rows);
+
+        if (!rows.length) {
+          return done(null, false, { message: "no user found" });
+        }
+        
         let user = rows[0];
 
         bcrypt.compare(password, user.pass, (err, isMatch) => {
@@ -63,10 +69,13 @@ passport.use(
             return done(null, user);
           }
           else {
-            return done("incorrect password", false);
+            return done(null, false, { message: "incorrect password" });
           }
         });
-      });
+      }
+      catch (err) {
+        throw err;
+      }
     })      
 );
 passport.serializeUser(function (user, done) {
