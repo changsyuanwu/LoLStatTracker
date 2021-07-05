@@ -72,6 +72,18 @@ We will be referring to `http://localhost:9000` as `...` since all routes have t
 
 ### Users (usersController.js)
 
+  * POST `.../users/authenticate` will attempt to authenticate a user based on the `username` and `password` fields in the request body
+
+  * POST `.../users/register` will register a new user based on the `username` and `password` fields in the request body
+
+  * PUT `.../users/change-password` will attempt to change a user's password to the `newPassword` field, verifying their identity using the `oldPassword` field in the request body
+
 ## Client
 
-Can view match history on the dashboard
+Can view match history on the match history page
+
+Champion play statistics are on the dashboard page
+
+Can register new users on the register page
+
+Can login and logout users
