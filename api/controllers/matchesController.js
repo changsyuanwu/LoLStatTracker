@@ -4,8 +4,11 @@ class MatchesController {
 
   static async getMatches(req, res, next) {
     const db = req.db;
+    let currentUser = req.user;
+    if (!currentUser) { currentUser.username = 'SYSTEM'; } 
     try {
-      const [matchlist] = await db.query(`SELECT * FROM matches`);
+      const [matchlist] = await db.query(
+        `SELECT * FROM matches WHERE author = ?`, [currentUser.username]);
       return res.json(matchlist);
     } catch (err) {
       throw err;
@@ -14,6 +17,9 @@ class MatchesController {
 
   static async getChampionMatchesListFilters(req, res, next) {
     const db = req.db;
+    let currentUser = req.user;
+    if (!currentUser) { currentUser.username = 'SYSTEM'; } 
+
     if (!req.query.name) {
       return res.status(400).json({
         error: "Champion name was not provided."
@@ -47,7 +53,7 @@ class MatchesController {
     }
     
     try {
-      let sqlQuery = `SELECT * FROM matches WHERE (
+      let sqlQuery = `SELECT * FROM matches WHERE ((
         ? IN (
           ${position === 'all' ? `LOWER(blue_top), LOWER(blue_jungle), LOWER(blue_mid), LOWER(blue_adc), LOWER(blue_support)` : ``}
           ${position === 'top' ? `LOWER(blue_top)` : ``}
@@ -71,9 +77,17 @@ class MatchesController {
       if (outcome != 'all') {
         sqlQuery += `AND result = ${outcome === 'win' ? `'Red'` : `'Blue'`}`;
       }
+      sqlQuery += `) AND author = ?`;
+      if (req.query.patch) {
+        sqlQuery += ` AND patch = ?`;
+      }
       sqlQuery += `)`;
       
-      const [matchlist] = await db.query(sqlQuery, [name, name]);
+      let paramArray = [name, name, currentUser.username];
+      if (req.query.patch) {
+        paramArray.push(req.query.patch);
+      }
+      const [matchlist] = await db.query(sqlQuery, paramArray);
       return res.json(matchlist);
     } catch (err) {
       throw err;
@@ -82,12 +96,13 @@ class MatchesController {
 
   static async postNewMatch(req, res, next) {
     const db = req.db;
-    /*
+    let currentUser = req.user;
+
     // enforce database requirements
-    if (req.body.blue_top || req.body.blue_jungle || req.body.blue_mid || 
-        req.body.blue_adc || req.body.blue_support || req.body.red_top || 
-        req.body.red_jungle || req.body.red_mid || req.body.red_adc ||
-        req.body.red_support || req.body.result) {
+    if (!(req.body.blue_top || req.body.blue_jungle || req.body.blue_mid || 
+          req.body.blue_adc || req.body.blue_support || req.body.red_top || 
+          req.body.red_jungle || req.body.red_mid || req.body.red_adc ||
+          req.body.red_support || req.body.result || req.body.patch)) {
       return res.status(400).json({
         error: "Missing mandatory field"
       });
@@ -101,11 +116,10 @@ class MatchesController {
       req.body.blue_mid, req.body.blue_adc, req.body.blue_support,
       req.body.red_top, req.body.red_jungle, req.body.red_mid, req.body.red_adc,
       req.body.red_support];
-    let [foundChampion];
     for (const championName in championsToCheck) {
-      foundChampion = await db.query(`SELECT COUNT(*) FROM champions 
+      let [foundChampion] = await db.query(`SELECT COUNT(*) FROM champions 
         WHERE champion_name = LOWER(?)`, [championName]);
-      if (foundChampion[0] == 0) {
+      if (foundChampion[0].count == 0) {
         return res.status(400).json({
           error: championName + " is not a valid champion name"
         });
@@ -113,33 +127,84 @@ class MatchesController {
     }
 
     try {
-      await db.query(`INSERT INTO matches (
+      const [result] = await db.query(`INSERT INTO matches (
         blue_top, blue_jungle, blue_mid, blue_adc, blue_support, red_top, 
-        red_jungle, red_mid, red_adc, red_support, result)
+        red_jungle, red_mid, red_adc, red_support, result, patch, author)
         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
         [req.body.blue_top, req.body.blue_jungle,
          req.body.blue_mid, req.body.blue_adc, req.body.blue_support,
          req.body.red_top, req.body.red_jungle, req.body.red_mid, 
-         req.body.red_adc, req.body.red_support, req.body.result]);
-    } catch (err) {
-      throw err;
-    }
-    */
-    try {
-      await db.query(
-        `INSERT INTO matches (
-          blue_top, blue_jungle, blue_mid, blue_adc, blue_support, red_top, 
-          red_jungle, red_mid, red_adc, red_support, result)
-        VALUES (
-          'Lee Sin', 'Rumble', 'Sett', 'Varus', 'Lulu', 'Viego', 'Xin Zhao',
-          'Lucian', 'Ezreal', 'Leona', 'Red')`);
-      console.log("Entry created successfully.");
+         req.body.red_adc, req.body.red_support, req.body.result,
+         req.body.patch, currentUser.username]);
+      return res.json(result);
     } catch (err) {
       throw err;
     }
   }
 
+  static async updateMatch(req, res, next) {
+    const db = req.db;
+    let currentUser = req.user;
 
+    // enforce database requirements
+    if (!(req.body.blue_top || req.body.blue_jungle || req.body.blue_mid || 
+        req.body.blue_adc || req.body.blue_support || req.body.red_top || 
+        req.body.red_jungle || req.body.red_mid || req.body.red_adc ||
+        req.body.red_support || req.body.result)) {
+      return res.status(400).json({
+        error: "Missing mandatory field"
+      });
+    }
+    if (req.body.result != 'Blue' && req.body.result != 'Red') {
+      return res.status(400).json({
+        error: "Result must be one of 'Blue' or 'Red'"
+      });
+    }
+    const championsToCheck = [req.body.blue_top, req.body.blue_jungle,
+      req.body.blue_mid, req.body.blue_adc, req.body.blue_support,
+      req.body.red_top, req.body.red_jungle, req.body.red_mid, req.body.red_adc,
+      req.body.red_support];
+    for (const championName in championsToCheck) {
+      let [foundChampion] = await db.query(`SELECT COUNT(*) FROM champions 
+        WHERE champion_name = LOWER(?)`, [championName]);
+      if (foundChampion[0].count == 0) {
+        return res.status(400).json({
+          error: championName + " is not a valid champion name"
+        });
+      }
+    }
+    let [foundMatch] = await db.query(`SELECT COUNT(*) FROM matches 
+      WHERE match_id = ?`, [req.params.matchID]);
+    if (foundMatch[0].count == 0) {
+      return res.status(400).json({
+        error: "match ID " + req.params.matchID + " does not exist"
+      });
+    }
+    
+    // check if currentUser is the author of the match
+    let [correctAuthor] = await db.query(`SELECT author FROM matches 
+      WHERE match_id = ?`, [req.params.matchID]);
+    if (correctAuthor[0] != currentUser.username) {
+      return res.status(401).json({
+        error: "match ID " + req.params.matchID + " does not belong to user " 
+               + currentUser.username
+      });
+    }
+
+    try {
+      await db.query(`UPDATE matches SET 
+        blue_top = ?, blue_jungle = ?, blue_mid = ?, blue_adc = ?, 
+        blue_support = ?, red_top = ?, red_jungle = ?, red_mid = ?, red_adc = ?,
+        red_support = ?, result = ?, patch = ? WHERE match_id = ?`,
+        [req.body.blue_top, req.body.blue_jungle,
+         req.body.blue_mid, req.body.blue_adc, req.body.blue_support,
+         req.body.red_top, req.body.red_jungle, req.body.red_mid, 
+         req.body.red_adc, req.body.red_support, req.body.result,
+         req.body.patch, req.params.matchID]);
+    } catch (err) {
+      throw err;
+    }
+  }
 }
 
 module.exports = MatchesController;
