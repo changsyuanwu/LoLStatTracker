@@ -1,5 +1,5 @@
 DROP TABLE IF EXISTS users;
 CREATE TABLE users(
-   username     TEXT NOT NULL PRIMARY KEY
-  ,pass     TEXT NOT NULL
+   username     VARCHAR(200) NOT NULL PRIMARY KEY
+  ,pass     VARCHAR(200) NOT NULL
 );

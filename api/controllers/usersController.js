@@ -11,9 +11,10 @@ class UsersController {
     const userPassword = req.body.password;
 
     try {
-      const [ countUsers ] = await db.query("SELECT COUNT(*) FROM users WHERE username = ?", [ userName ]);
+      const [ countUsers ] = await db.query("SELECT COUNT(*) AS count FROM users WHERE username = ?", [ userName ]);
       
       // Make sure we are not creating a duplicate user
+      console.log(countUsers[0]);
       if (countUsers[0].count !== 0) {
         return res.status(400).json({
           error: "username already exists"
@@ -28,11 +29,11 @@ class UsersController {
             // create user object
             const user = {
               username: userName,
-              pass: hash
+              password: hash
             }
 
             // insert into the db
-            await db.query("INSERT INTO users SET ?", user)
+            await db.query("INSERT INTO users SET username = ?, pass = ?", [ user.username, user.password ])
 
             return res.status(200).json({
               message: "success"
