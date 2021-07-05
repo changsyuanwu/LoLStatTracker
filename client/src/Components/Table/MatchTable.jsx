@@ -51,14 +51,14 @@ export default function Table() {
               resolve();
             }, 1000)
           }),
-        onRowDelete: oldData =>
+        onRowDelete: deleteRow =>
           new Promise((resolve, reject) => {
               setTimeout(() => {
-                const dataDelete = [...arr];
-                const index = oldData.tableData.id;
-                dataDelete.splice(index, 1);
-                setData([...dataDelete]);
-                matches.delete(oldData);
+                const delete_old = [...arr];
+                const rowID = deleteRow.tableData.id;
+                delete_old.splice(rowID, 1);
+                setData([...delete_old]);
+                matches.delete(deleteRow);
                 resolve();
               }, 1000);
             }) 

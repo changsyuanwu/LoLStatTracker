@@ -93,6 +93,17 @@ export default function Table() {
                 newsetData([...newvar, newRow]);
                 resolve();
               }, 1000)
+            }),
+          onRowDelete: deleteRow =>
+          new Promise((resolve, reject) => {
+              setTimeout(() => {
+                const delete_it = [...arr];
+                const row_id = deleteRow.tableData.id;
+                delete_it.splice(row_id, 1);
+                setData([...delete_it]);
+                matches.delete(deleteRow);
+                resolve();
+              }, 1000);
             }) 
         }}*/
       />
