@@ -32,7 +32,14 @@ const usersRouter = require('./routes/usersRouter');
 const app = express();
 
 // Add cors
-app.use(cors({ credentials: true, origin: 'localhost:9000'}));
+const corsOptions = {
+  credentials: true,
+  origin: [ 
+    'http://localhost:9000',
+    'http://localhost:3000'
+  ]
+}
+app.use(cors(corsOptions));
 app.options('*', cors());  // enable pre-flight
 
 // Make our db accessible to our router
