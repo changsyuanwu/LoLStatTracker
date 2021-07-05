@@ -72,6 +72,7 @@ export default function Table() {
 
    if (arr != null) {
     championstats();
+    setData(null);
    }
 
   return (<div style={{ maxWidth: '80%',  margin: 'auto' }}>
@@ -79,6 +80,12 @@ export default function Table() {
         title="Champions Data"
         columns={champions}
         data={newvar}
+        options={{
+          pageSize: 10,
+          pageSizeOptions: [10,20,50,100],
+          toolbar: true,
+          paging: true
+        }}
         /*editable={{
           onRowAdd: newRow =>
             new Promise((resolve, reject) => {

@@ -36,8 +36,12 @@ export default function Table() {
           headerStyle: {
             backgroundColor: "#1b1b1b",
             color: "#FFF",
-          }}
-        }
+          },
+          pageSize: 10,
+          pageSizeOptions: [10,20,50,100],
+          toolbar: true,
+          paging: true
+        }}
         editable={{
         onRowAdd: newRow =>
           new Promise((resolve, reject) => {
