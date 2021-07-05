@@ -5,7 +5,11 @@ class MatchesController {
   static async getMatches(req, res, next) {
     const db = req.db;
     let currentUser = req.user;
-    if (!currentUser) { currentUser.username = 'SYSTEM'; } 
+    if (currentUser) { 
+      currentUser = req.user.username;
+     } else {
+       currentUser = 'SYSTEM';
+     }
     try {
       const [matchlist] = await db.query(
         `SELECT * FROM matches WHERE author = ?`, [currentUser.username]);
@@ -18,7 +22,11 @@ class MatchesController {
   static async getChampionMatchesListFilters(req, res, next) {
     const db = req.db;
     let currentUser = req.user;
-    if (!currentUser) { currentUser.username = 'SYSTEM'; } 
+    if (currentUser) { 
+      currentUser = req.user.username;
+     } else {
+       currentUser = 'SYSTEM';
+     }
 
     if (!req.query.name) {
       return res.status(400).json({
