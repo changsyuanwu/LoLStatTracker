@@ -11,9 +11,10 @@ const changePassUser = {
 };
 
 // try to authenticate a user with username "test@example.com" and password "password"
-fetch("http://localhost:9000/users/authenticate", {
+fetch("http://127.0.0.1:9000/users/authenticate", {
   method: 'POST',
   body: JSON.stringify(loginUser),
+  credentials: 'include',
   headers: { 'Content-Type': 'application/json' }
 })
   .then(response => response.json())
@@ -21,9 +22,10 @@ fetch("http://localhost:9000/users/authenticate", {
     console.log(data);
 
     // change the user's password to "password1"
-    fetch("http://localhost:9000/users/change-password", {
+    fetch("http://127.0.0.1:9000/users/change-password", {
       method: 'PUT',
       body: JSON.stringify(changePassUser),
+      credentials: 'include',
       headers: { 'Content-Type': 'application/json' }
     })
       .then(response => response.json())
