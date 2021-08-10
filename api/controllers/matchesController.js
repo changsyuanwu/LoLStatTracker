@@ -213,6 +213,36 @@ class MatchesController {
       throw err;
     }
   }
+
+  static async deleteMatch(req, res, next) {
+    const db = req.db;
+    let currentUser = req.user;
+    
+    let [foundMatch] = await db.query(`SELECT COUNT(*) FROM matches 
+      WHERE match_id = ?`, [req.params.matchID]);
+    if (foundMatch[0].count == 0) {
+      return res.status(400).json({
+        error: "match ID " + req.params.matchID + " does not exist"
+      });
+    }
+  
+    // check if currentUser is the author of the match
+    let [correctAuthor] = await db.query(`SELECT author FROM matches 
+      WHERE match_id = ?`, [req.params.matchID]);
+    if (correctAuthor[0] != currentUser.username) {
+      return res.status(401).json({
+        error: "match ID " + req.params.matchID + " does not belong to user " 
+               + currentUser.username
+      });
+    }
+
+    try {
+      await db.query(`DELETE FROM matches WHERE match_id = ?`,
+        [req.params.matchID]);
+    } catch (err) {
+      throw err;
+    }
+  }
 }
 
 module.exports = MatchesController;
