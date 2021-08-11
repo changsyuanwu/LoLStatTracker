@@ -40,4 +40,10 @@ router.post('/new', ensureAuthenticated, MatchesController.postNewMatch);
  */
 router.put('/edit/:matchID', ensureAuthenticated, MatchesController.updateMatch);
 
+/* DELETE an existing match:
+ *   matchID: the ID of the match to be deleted. The authenticated user must
+ *            own the match in question. Mandatory field.
+ */
+router.delete('/delete/:matchID', ensureAuthenticated, MatchesController.deleteMatch);
+
 module.exports = router;
