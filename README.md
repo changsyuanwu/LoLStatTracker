@@ -75,6 +75,9 @@ We will be referring to `http://localhost:9000` as `...` since all routes have t
   * PUT `.../matches/edit/<matchID>` updates a match with edits defined in the response body. All fields must be present. The user must be authenticated and must be the author of the match. See the examples for the GET requests for the field names.
     * Example: `.../matches/edit/2` will edit the match with ID 2.
 
+  * DELETE `.../matches/delete/<matchID>` deletes a match. User must be authenticated and must be the author of the match.
+    * Example: `.../matches/2` will delete the match with ID 2.
+
 ### Users (usersController.js)
 
   * POST `.../users/authenticate` will attempt to authenticate a user based on the `username` and `password` fields in the request body
