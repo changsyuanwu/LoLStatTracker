@@ -16,7 +16,7 @@ class champion {
         const res = axios.get(api + 'champions/stats/' + name);
         return res;
     }
-    postbasestat(data) {
+    putbasestat(data) {
         axios.post(api + 'champions/update-stats', {data});
     }
 }

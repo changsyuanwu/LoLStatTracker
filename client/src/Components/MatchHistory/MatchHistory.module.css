@@ -6,3 +6,16 @@
 .inputSection {
     padding-bottom: 30px;
 }
+
+.header {
+    height: 50px;
+}
+
+.title {
+    width: 50%;
+}
+
+.charts {
+    width: 100px;
+    height:50px
+}

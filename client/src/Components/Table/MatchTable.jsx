@@ -58,7 +58,7 @@ export default function Table() {
                 const rowID = deleteRow.tableData.id;
                 delete_old.splice(rowID, 1);
                 setData([...delete_old]);
-                matches.delete(deleteRow);
+                matches.deletematch(deleteRow);
                 resolve();
               }, 1000);
             }) 
