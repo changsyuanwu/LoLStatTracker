@@ -17,54 +17,54 @@ export const MatchFields = createContext({
 export const combined= [
     {title: "Blue ADC", field: "blue_adc" ,
     cellStyle: {
-        backgroundColor: '#1338BE',
+        backgroundColor: '#85C1E9',
         color: '#FFF'
       }}, 
     {title: "Jungle", field: "blue_jungle",
     cellStyle: {
-        backgroundColor: '#1338BE',
+        backgroundColor: '#85C1E9',
         color: '#FFF'
       } },
     {title: "Mid", field: "blue_mid" ,
     cellStyle: {
-        backgroundColor: '#1338BE',
+        backgroundColor: '#85C1E9',
         color: '#FFF'
       }},
     {title: "Support", field: "blue_support",
     cellStyle: {
-        backgroundColor: '#1338BE',
+        backgroundColor: '#85C1E9',
         color: '#FFF'
       } },
     {title: "Top", field: "blue_top" ,
     cellStyle: {
-        backgroundColor: '#1338BE',
+        backgroundColor: '#85C1E9',
         color: '#FFF'
       }},
     {title: "Match Number", field: "match_id" },
     {title: "Result", field: "result" },
     {title: "Red ADC", field: "red_adc",
     cellStyle: {
-        backgroundColor: '#990F02',
+        backgroundColor: '#F1948A',
         color: '#FFF'
       }},
     {title: "Jungle", field: "red_jungle" ,
     cellStyle: {
-        backgroundColor: '#990F02',
+        backgroundColor: '#F1948A',
         color: '#FFF'
       }},
     {title: "Mid", field: "red_mid" ,
     cellStyle: {
-        backgroundColor: '#990F02',
+        backgroundColor: '#F1948A',
         color: '#FFF'
       }},
     {title: "Support", field: "red_support" ,
     cellStyle: {
-        backgroundColor: '#990F02',
+        backgroundColor: '#F1948A',
         color: '#FFF'
       }},
     {title: "Top", field: "red_top" ,
     cellStyle: {
-        backgroundColor: '#990F02',
+        backgroundColor: '#F1948A',
         color: '#FFF'
       }}
 ]

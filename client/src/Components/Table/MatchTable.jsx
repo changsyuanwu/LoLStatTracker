@@ -51,6 +51,16 @@ export default function Table() {
               resolve();
             }, 1000)
           }),
+          onRowUpdate: (newData, oldrow) =>
+          new Promise((resolve, reject) => {
+            setTimeout(() => {
+              const Update = [...arr];
+              const rowID = oldrow.tableData.id;
+              Update[rowID] = newData;
+              setData([...Update]);
+              resolve();
+            }, 1000)
+          }),
         onRowDelete: deleteRow =>
           new Promise((resolve, reject) => {
               setTimeout(() => {
