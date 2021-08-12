@@ -101,8 +101,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(passport.initialize());
-app.use(passport.session());
 
 // Setup session (expires in 15 minutes)
 app.use(session({
@@ -112,11 +110,11 @@ app.use(session({
   saveUninitialized: true,
   rolling: true,
   cookie: {
-    sameSite: "none",
-    httpOnly: true,
     maxAge: 900000
   }
 }));
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Add the routers to the app
 app.use('/', indexRouter);
