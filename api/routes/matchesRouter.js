@@ -30,20 +30,22 @@ router.get('/filter', MatchesController.getChampionMatchesListFilters);
  *   red_support: [champion name, unique within the team]
  *   result: ONE OF [Red, Blue]
  *   patch: patch version [e.g., 11.0]. Periods may need to be escaped (use %2E)
- *   author: the username of the current authenticated user that created this entry
  * All body values are mandatory.
  */
-router.post('/new', ensureAuthenticated, MatchesController.postNewMatch);
+//router.post('/new', ensureAuthenticated, MatchesController.postNewMatch);
+router.post('/new', MatchesController.postNewMatch);
 
 /* PUT updated details for an existing match:
- * Body requires same fields as POST new match details, except for author. 
+ * Body requires same fields as POST new match details. 
  */
-router.put('/edit/:matchID', ensureAuthenticated, MatchesController.updateMatch);
+//router.put('/edit/:matchID', ensureAuthenticated, MatchesController.updateMatch);
+router.put('/edit/:matchID', MatchesController.updateMatch);
 
 /* DELETE an existing match:
  *   matchID: the ID of the match to be deleted. The authenticated user must
  *            own the match in question. Mandatory field.
  */
-router.delete('/delete/:matchID', ensureAuthenticated, MatchesController.deleteMatch);
+//router.delete('/delete/:matchID', ensureAuthenticated, MatchesController.deleteMatch);
+router.delete('/delete/:matchID', MatchesController.deleteMatch);
 
 module.exports = router;

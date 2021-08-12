@@ -16,6 +16,8 @@ class MatchesController {
         `SELECT * FROM matches WHERE author = ?`, [currentUser]);
       return res.json(matchlist);
     } catch (err) {
+      console.log("Error: error follows: ");
+      console.log(err);
       throw err;
     }
   }
@@ -30,6 +32,7 @@ class MatchesController {
     }
 
     if (!req.query.name) {
+      console.log("Error 400: champion name not provided");
       return res.status(400).json({
         error: "Champion name was not provided."
       });
@@ -41,6 +44,7 @@ class MatchesController {
       position = req.query.position.toLowerCase();
       if (position != 'all' && position != 'top' && position != 'jungle' 
           && position != 'mid' && position != 'adc' && position != 'support') {
+        console.log("Error 400: invalid position");
         return res.status(400).json({
           error: "Invalid position"
         });
@@ -53,6 +57,7 @@ class MatchesController {
     if (req.query.outcome) {
       outcome = req.query.outcome.toLowerCase();
       if (outcome != 'all' && outcome != 'win' && outcome != 'loss') {
+        console.log("Error 400: invalid outcome");
         return res.status(400).json({
           error: "Invalid outcome"
         });
@@ -99,6 +104,8 @@ class MatchesController {
       const [matchlist] = await db.query(sqlQuery, paramArray);
       return res.json(matchlist);
     } catch (err) {
+      console.log("Error: error follows: ");
+      console.log(err);
       throw err;
     }
   }
@@ -117,6 +124,7 @@ class MatchesController {
           req.body.blue_adc || req.body.blue_support || req.body.red_top || 
           req.body.red_jungle || req.body.red_mid || req.body.red_adc ||
           req.body.red_support || req.body.result || req.body.patch)) {
+      console.log("Error 400: missing a mandatory field:");
       return res.status(400).json({
         error: "Missing mandatory field"
       });
@@ -134,6 +142,7 @@ class MatchesController {
       let [foundChampion] = await db.query(`SELECT COUNT(*) FROM champions 
         WHERE champion_name = LOWER(?)`, [championName]);
       if (foundChampion[0].count == 0) {
+        console.log("Error 400: invalid champion name");
         return res.status(400).json({
           error: championName + " is not a valid champion name"
         });
@@ -152,6 +161,8 @@ class MatchesController {
          req.body.patch, currentUser]);
       return res.json(result);
     } catch (err) {
+      console.log("Error: error follows: ");
+      console.log(err);
       throw err;
     }
   }
@@ -170,11 +181,13 @@ class MatchesController {
         req.body.blue_adc || req.body.blue_support || req.body.red_top || 
         req.body.red_jungle || req.body.red_mid || req.body.red_adc ||
         req.body.red_support || req.body.result)) {
+      console.log("Error: missing mandatory field");
       return res.status(400).json({
         error: "Missing mandatory field"
       });
     }
     if (req.body.result != 'Blue' && req.body.result != 'Red') {
+      console.log("Error 400: result needs to be either blue or red");
       return res.status(400).json({
         error: "Result must be one of 'Blue' or 'Red'"
       });
@@ -187,6 +200,7 @@ class MatchesController {
       let [foundChampion] = await db.query(`SELECT COUNT(*) FROM champions 
         WHERE champion_name = LOWER(?)`, [championName]);
       if (foundChampion[0].count == 0) {
+        console.log("Error 400: invalid champion name");
         return res.status(400).json({
           error: championName + " is not a valid champion name"
         });
@@ -195,6 +209,7 @@ class MatchesController {
     let [foundMatch] = await db.query(`SELECT COUNT(*) FROM matches 
       WHERE match_id = ?`, [req.params.matchID]);
     if (foundMatch[0].count == 0) {
+      console.log("Error 400: match does not exist");
       return res.status(400).json({
         error: "match ID " + req.params.matchID + " does not exist"
       });
@@ -204,6 +219,7 @@ class MatchesController {
     let [correctAuthor] = await db.query(`SELECT author FROM matches 
       WHERE match_id = ?`, [req.params.matchID]);
     if (correctAuthor[0] != currentUser) {
+      console.log("Error 401: different match author");
       return res.status(401).json({
         error: "match ID " + req.params.matchID + " does not belong to user " 
                + currentUser
@@ -221,6 +237,8 @@ class MatchesController {
          req.body.red_adc, req.body.red_support, req.body.result,
          req.body.patch, req.params.matchID]);
     } catch (err) {
+      console.log("Error: error follows: ");
+      console.log(err);
       throw err;
     }
   }
@@ -238,6 +256,7 @@ class MatchesController {
     let [foundMatch] = await db.query(`SELECT COUNT(*) FROM matches 
       WHERE match_id = ?`, [req.params.matchID]);
     if (foundMatch[0].count == 0) {
+      console.log("Error 400: match does not exist");
       return res.status(400).json({
         error: "match ID " + req.params.matchID + " does not exist"
       });
@@ -247,6 +266,7 @@ class MatchesController {
     let [correctAuthor] = await db.query(`SELECT author FROM matches 
       WHERE match_id = ?`, [req.params.matchID]);
     if (correctAuthor[0] != currentUser) {
+      console.log("Error 401: different author");
       return res.status(401).json({
         error: "match ID " + req.params.matchID + " does not belong to user " 
                + currentUser
@@ -257,6 +277,8 @@ class MatchesController {
       await db.query(`DELETE FROM matches WHERE match_id = ?`,
         [req.params.matchID]);
     } catch (err) {
+      console.log("Error: error follows: ");
+      console.log(err);
       throw err;
     }
   }
