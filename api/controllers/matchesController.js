@@ -8,9 +8,9 @@ class MatchesController {
     console.log(req);
     if (currentUser) { 
       currentUser = req.user.username;
-     } else {
+    } else {
        currentUser = 'SYSTEM';
-     }
+    }
     try {
       console.log("Current user: " + currentUser);
       const [matchlist] = await db.query(
@@ -26,9 +26,9 @@ class MatchesController {
     let currentUser = req.user;
     if (currentUser) { 
       currentUser = req.user.username;
-     } else {
+    } else {
        currentUser = 'SYSTEM';
-     }
+    }
 
     if (!req.query.name) {
       return res.status(400).json({
@@ -107,6 +107,11 @@ class MatchesController {
   static async postNewMatch(req, res, next) {
     const db = req.db;
     let currentUser = req.user;
+    if (currentUser) { 
+      currentUser = req.user.username;
+    } else {
+       currentUser = 'SYSTEM';
+    }
 
     // enforce database requirements
     if (!(req.body.blue_top || req.body.blue_jungle || req.body.blue_mid || 
@@ -145,7 +150,7 @@ class MatchesController {
          req.body.blue_mid, req.body.blue_adc, req.body.blue_support,
          req.body.red_top, req.body.red_jungle, req.body.red_mid, 
          req.body.red_adc, req.body.red_support, req.body.result,
-         req.body.patch, currentUser.username]);
+         req.body.patch, currentUser]);
       return res.json(result);
     } catch (err) {
       throw err;
@@ -155,6 +160,11 @@ class MatchesController {
   static async updateMatch(req, res, next) {
     const db = req.db;
     let currentUser = req.user;
+    if (currentUser) { 
+      currentUser = req.user.username;
+    } else {
+       currentUser = 'SYSTEM';
+    }
 
     // enforce database requirements
     if (!(req.body.blue_top || req.body.blue_jungle || req.body.blue_mid || 
@@ -194,10 +204,10 @@ class MatchesController {
     // check if currentUser is the author of the match
     let [correctAuthor] = await db.query(`SELECT author FROM matches 
       WHERE match_id = ?`, [req.params.matchID]);
-    if (correctAuthor[0] != currentUser.username) {
+    if (correctAuthor[0] != currentUser) {
       return res.status(401).json({
         error: "match ID " + req.params.matchID + " does not belong to user " 
-               + currentUser.username
+               + currentUser
       });
     }
 
@@ -219,6 +229,11 @@ class MatchesController {
   static async deleteMatch(req, res, next) {
     const db = req.db;
     let currentUser = req.user;
+    if (currentUser) { 
+      currentUser = req.user.username;
+    } else {
+       currentUser = 'SYSTEM';
+    }
     
     let [foundMatch] = await db.query(`SELECT COUNT(*) FROM matches 
       WHERE match_id = ?`, [req.params.matchID]);
@@ -231,10 +246,10 @@ class MatchesController {
     // check if currentUser is the author of the match
     let [correctAuthor] = await db.query(`SELECT author FROM matches 
       WHERE match_id = ?`, [req.params.matchID]);
-    if (correctAuthor[0] != currentUser.username) {
+    if (correctAuthor[0] != currentUser) {
       return res.status(401).json({
         error: "match ID " + req.params.matchID + " does not belong to user " 
-               + currentUser.username
+               + currentUser
       });
     }
 
