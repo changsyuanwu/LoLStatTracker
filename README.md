@@ -76,7 +76,7 @@ We will be referring to `http://localhost:9000` as `...` since all routes have t
     * Example: `.../matches/edit/2` will edit the match with ID 2.
 
   * DELETE `.../matches/delete/<matchID>` deletes a match. User must be authenticated and must be the author of the match.
-    * Example: `.../matches/2` will delete the match with ID 2.
+    * Example: `.../matches/delete/2` will delete the match with ID 2.
 
 ### Users (usersController.js)
 
