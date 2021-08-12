@@ -11,8 +11,9 @@ class MatchesController {
        currentUser = 'SYSTEM';
      }
     try {
+      console.log("Current user: " + currentUser);
       const [matchlist] = await db.query(
-        `SELECT * FROM matches WHERE author = ?`, [currentUser.username]);
+        `SELECT * FROM matches WHERE author = ?`, [currentUser]);
       return res.json(matchlist);
     } catch (err) {
       throw err;
@@ -91,7 +92,7 @@ class MatchesController {
       }
       sqlQuery += `)`;
       
-      let paramArray = [name, name, currentUser.username];
+      let paramArray = [name, name, currentUser];
       if (req.query.patch) {
         paramArray.push(req.query.patch);
       }
