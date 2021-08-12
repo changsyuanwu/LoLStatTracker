@@ -1,8 +1,9 @@
 import React from 'react';
-import { Bar, Doughnut } from 'react-chartjs-2';
+import { Bar } from 'react-chartjs-2';
 import  {useSelector, useDispatch} from 'react-redux'
 import matches from '../../services/matches'
 import { useEffect, useState } from 'react'
+import styles from "../MatchHistory/MatchHistory.module.css";
 
 export default function BarGraph() {
 
@@ -89,15 +90,23 @@ const Baroptions = {
         {
           ticks: {
             beginAtZero: false,
-          },
+            fontSize: 20
+          }
         },
-      ],
-    }
+      ]
+    },
+    "legend": {
+      "display": true,
+      "labels": {
+          "fontSize": 20,
+      }
+    },
+    maintainAspectRatio: true,
 };
 
 return (    
-  <div>
-    <h1 className='title'>Team Result Comparison</h1>
+  <div style={styles.bargraphstyle}>
+    <h1 className={styles.title}>Team Result Comparison</h1>
     <Bar data={Bardata} options={Baroptions}/>
   </div>
   )
