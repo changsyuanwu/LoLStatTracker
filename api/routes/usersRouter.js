@@ -19,4 +19,7 @@ router.post('/authenticate',
 /* POST to Add User Service */
 router.post('/register', UsersController.postRegister);
 
+/* POST to logout service */
+router.post('/logout', UsersController.postLogout);
+
 module.exports = router;

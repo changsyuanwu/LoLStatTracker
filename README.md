@@ -86,6 +86,8 @@ We will be referring to `http://localhost:9000` as `...` since all routes have t
 
   * PUT `.../users/change-password` will attempt to change a user's password to the `newPassword` field, verifying their identity using the `oldPassword` field in the request body
 
+  * POST `.../users/logout` will logout the user currently logged in
+
 ## Client
 
 Can view match history on the dashboard
