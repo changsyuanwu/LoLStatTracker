@@ -42,6 +42,7 @@ export const combined= [
       }},
     {title: "Match Number", field: "match_id" },
     {title: "Result", field: "result" },
+    {title: "Patch", field: "patch" },
     {title: "Red ADC", field: "red_adc",
     cellStyle: {
         backgroundColor: '#F1948A',
