@@ -58,6 +58,7 @@ export default function Table() {
               const rowID = oldrow.tableData.id;
               Update[rowID] = newData;
               setData([...Update]);
+              matches.putmatch(newData["match_id"],newData);
               resolve();
             }, 1000)
           }),
