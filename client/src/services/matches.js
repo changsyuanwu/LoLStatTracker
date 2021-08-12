@@ -9,10 +9,12 @@ class matches {
         return res;
     }
     postmatch(data){
+        data["author"] = "not system";
+        data["patch"] = 11.0;
         axios.post(api + 'matches/new', {data});
     }
-    deletematch(data) {
-        axios.delete(api + 'matches/delete', {data});
+    deletematch(match) {
+        axios.delete(api + 'matches/delete/' + match);
     }
 }
 

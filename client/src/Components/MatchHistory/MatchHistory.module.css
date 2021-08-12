@@ -6,3 +6,26 @@
 .inputSection {
     padding-bottom: 30px;
 }
+
+.header {
+    height: 50px;
+    padding-bottom: 1%;
+}
+
+.title {
+    width: 50%;
+    padding-bottom: 1%;
+    color:rgb(23, 109, 62);
+}
+
+.doughnutstyle {
+    height: 500px;
+    padding-bottom: 0%;
+}
+
+.topspacing {
+    padding-left: 2%;
+    padding-right: 2%;
+    padding-top: 1%;
+    padding-bottom: 2%;
+}
