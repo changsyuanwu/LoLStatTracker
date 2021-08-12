@@ -235,6 +235,7 @@ class MatchesController {
        currentUser = 'SYSTEM';
     }
     
+    console.log(currentUser.username);
     let [foundMatch] = await db.query(`SELECT COUNT(*) FROM matches 
       WHERE match_id = ?`, [req.params.matchID]);
     if (foundMatch[0].count == 0) {

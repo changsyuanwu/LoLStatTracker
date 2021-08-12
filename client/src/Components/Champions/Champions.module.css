@@ -27,3 +27,9 @@
 .navBar {
     float: right;
 }
+
+.editStats {
+    font-size: 10px;
+    padding: 5px !important;
+    margin-left: 3%;
+}

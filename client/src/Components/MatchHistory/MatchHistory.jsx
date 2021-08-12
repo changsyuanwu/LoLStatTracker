@@ -25,7 +25,7 @@ export default class Dashboard extends Component {
                 <Row>
                     <MatchTable />
                 </Row>
-                <Row>
+                <Row className={styles.topspacing}>
                     <Col className={styles.bargraph}>
                         <BarGraph/>
                     </Col>

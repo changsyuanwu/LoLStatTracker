@@ -1,8 +1,9 @@
 import React from 'react';
-import { Bar, Doughnut } from 'react-chartjs-2';
+import { Doughnut } from 'react-chartjs-2';
 import  {useSelector, useDispatch} from 'react-redux'
 import matches from '../../services/matches'
 import { useEffect, useState } from 'react'
+import styles from "../MatchHistory/MatchHistory.module.css";
 
 export default function DoughGraph() {
 
@@ -100,16 +101,21 @@ const Doughdata = {
 };
 
 return (    
-   <>
-    <h1 className='title'>Player Wins</h1>
+   <div className={styles.doughnutstyle}>
+    <h1 className={styles.title}>Player Wins</h1>
     <Doughnut 
-    data={Doughdata}
-      height={200}         
+      data={Doughdata}
       options={{
         responsive: true,
-        maintainAspectRatio: true,
-      }} />
-  </>
+        maintainAspectRatio: false,
+        "legend": {
+        "display": true,
+        "labels": {
+          font: {size: 20},
+        }
+    },
+    }} />
+  </div>
   )
 }
 //href='https://github.com/reactchartjs/react-chartjs-2/blob/master/example/src/charts/VerticalBar.js'
