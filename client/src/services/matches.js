@@ -13,6 +13,11 @@ class matches {
         data["patch"] = 11.0;
         axios.post(api + 'matches/new', {data});
     }
+    putmatch(match, data) {
+        data["author"] = "not system"
+        data["patch"] = 11.0
+        axios.put(api + 'matches/edit/'+ match, {data});
+    }
     deletematch(match) {
         axios.delete(api + 'matches/delete/' + match);
     }
