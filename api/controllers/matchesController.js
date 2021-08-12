@@ -5,6 +5,7 @@ class MatchesController {
   static async getMatches(req, res, next) {
     const db = req.db;
     let currentUser = req.user;
+    console.log(req);
     if (currentUser) { 
       currentUser = req.user.username;
      } else {
