@@ -5,7 +5,6 @@ class MatchesController {
   static async getMatches(req, res, next) {
     const db = req.db;
     let currentUser = req.user;
-    console.log(req);
     if (currentUser) { 
       currentUser = req.user.username;
     } else {
@@ -235,7 +234,7 @@ class MatchesController {
        currentUser = 'SYSTEM';
     }
     
-    console.log(currentUser.username);
+    console.log("Current user: " + currentUser);
     let [foundMatch] = await db.query(`SELECT COUNT(*) FROM matches 
       WHERE match_id = ?`, [req.params.matchID]);
     if (foundMatch[0].count == 0) {
