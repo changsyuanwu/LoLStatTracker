@@ -1,5 +1,7 @@
 # CS348 Group Project
 
+GitHub Repo Link: https://github.com/changsyuanwu/cs348project
+
 The files needed for each Milestone are located in the `archives` folder
 
 # Prerequisites
