@@ -1,5 +1,18 @@
 class ChampionsController {
 
+  static async getChampionNamesList(req, res, next) {
+    const db = req.db;
+
+    try {
+      const [champsList] = await db.query(`SELECT champion_name FROM champions`);
+
+      return res.json(champsList.map(champ => champ.champion_name));
+    }
+    catch (err) {
+      throw err;
+    }
+  }
+
   static async getChampionStatsByName(req, res, next) {
     // Get a champion by their name (case insensitive)
 
@@ -10,19 +23,6 @@ class ChampionsController {
     try {
       const [champStats] = await db.query('SELECT * FROM champions WHERE LOWER(champion_name) = ?', [name])
       return res.json(champStats[0]);
-    }
-    catch (err) {
-      throw err;
-    }
-  }
-
-  static async getChampionNamesList(req, res, next) {
-    const db = req.db;
-
-    try {
-      const [champsList] = await db.query(`SELECT champion_name FROM champions`);
-
-      return res.json(champsList.map(champ => champ.champion_name));
     }
     catch (err) {
       throw err;
