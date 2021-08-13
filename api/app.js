@@ -12,6 +12,7 @@ const session = require('express-session');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcrypt');
+const bodyParser = require('body-parser');
 
 // Setup DB
 let db = mysql.createPool({
@@ -30,6 +31,11 @@ const usersRouter = require('./routes/usersRouter');
 
 // App setup
 const app = express();
+
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }))
+// parse application/json
+app.use(bodyParser.json())
 
 // Add cors
 const corsOptions = {
