@@ -119,17 +119,32 @@ class MatchesController {
        currentUser = 'SYSTEM';
     }
 
+    console.log(req.body.blue_top);
+    console.log(req.body.blue_jungle);
+    console.log(req.body.blue_mid);
+    console.log(req.body.blue_adc);
+    console.log(req.body.blue_support);
+    console.log(req.body.red_jungle);
+    console.log(req.body.red_mid);
+    console.log(req.body.red_adc);
+    console.log(req.body.red_support);
+    console.log(req.body.result);
+    console.log(req.body.patch);
+    console.log(currentUser);
+
     // enforce database requirements
     if (!(req.body.blue_top || req.body.blue_jungle || req.body.blue_mid || 
           req.body.blue_adc || req.body.blue_support || req.body.red_top || 
           req.body.red_jungle || req.body.red_mid || req.body.red_adc ||
           req.body.red_support || req.body.result || req.body.patch)) {
       console.log("Error 400: missing a mandatory field:");
+      
       return res.status(400).json({
         error: "Missing mandatory field"
       });
     }
     if (req.body.result != 'Blue' && req.body.result != 'Red') {
+      console.log("Error 400: result must be either blue or red:");
       return res.status(400).json({
         error: "Result must be one of 'Blue' or 'Red'"
       });
@@ -153,7 +168,7 @@ class MatchesController {
       const [result] = await db.query(`INSERT INTO matches (
         blue_top, blue_jungle, blue_mid, blue_adc, blue_support, red_top, 
         red_jungle, red_mid, red_adc, red_support, result, patch, author)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
         [req.body.blue_top, req.body.blue_jungle,
          req.body.blue_mid, req.body.blue_adc, req.body.blue_support,
          req.body.red_top, req.body.red_jungle, req.body.red_mid, 
@@ -277,7 +292,7 @@ class MatchesController {
       await db.query(`DELETE FROM matches WHERE match_id = ?`,
         [req.params.matchID]);
     } catch (err) {
-      console.log("Error: error follows: ");
+      console.log("Error: error follows:");
       console.log(err);
       throw err;
     }
