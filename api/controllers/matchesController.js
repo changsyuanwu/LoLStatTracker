@@ -190,6 +190,7 @@ class MatchesController {
     } else {
        currentUser = 'SYSTEM';
     }
+    console.log(currentUser);
 
     // enforce database requirements
     if (!(req.body.blue_top || req.body.blue_jungle || req.body.blue_mid || 
@@ -233,7 +234,8 @@ class MatchesController {
     // check if currentUser is the author of the match
     let [correctAuthor] = await db.query(`SELECT author FROM matches 
       WHERE match_id = ?`, [req.params.matchID]);
-    if (correctAuthor[0] != currentUser) {
+    if (correctAuthor[0].author && correctAuthor[0].author != currentUser) {
+      console.log(correctAuthor[0].author);
       console.log("Error 401: different match author");
       return res.status(401).json({
         error: "match ID " + req.params.matchID + " does not belong to user " 
@@ -280,7 +282,7 @@ class MatchesController {
     // check if currentUser is the author of the match
     let [correctAuthor] = await db.query(`SELECT author FROM matches 
       WHERE match_id = ?`, [req.params.matchID]);
-    if (correctAuthor[0] != currentUser) {
+    if (correctAuthor[0].author && correctAuthor[0].author != currentUser) {
       console.log("Error 401: different author");
       return res.status(401).json({
         error: "match ID " + req.params.matchID + " does not belong to user " 
