@@ -1,5 +1,8 @@
 # League of Legends Stats Tracker
 
+Tracks winrates, playrates and base stats for champions in the game League of Legends.
+Created as part of the CS348 course at the University of Waterloo
+
 # Prerequisites
 
 To run, make sure you have Node.js and MySQL installed.
